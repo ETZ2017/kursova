@@ -1,7 +1,7 @@
-package edu.zhenia.labtwodb.controllers.web;
+package edu.zhenia.labtwodb.controllers.api;
 
-import edu.zhenia.labtwodb.model.Places;
-import edu.zhenia.labtwodb.service.places.impls.PlacesServiceImpl;
+import edu.zhenia.labtwodb.model.Genre;
+import edu.zhenia.labtwodb.service.genre.impls.GenreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/places")
-public class PlacesController {
+@RequestMapping("/api/genre")
+public class GenreController {
     @Autowired
-    PlacesServiceImpl service;
+    GenreServiceImpl service;
 
     @RequestMapping("/List")
-    List<Places> getall(){
+    List<Genre> getall(){
         return service.getAll();
     }
 }

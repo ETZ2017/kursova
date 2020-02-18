@@ -19,7 +19,7 @@ public class OrganiserDaoImplFake implements IOrganiserDao {
     }
 
     @Override
-    public Organiser get(String key) {
+    public Organiser get(String id) {
         return null;
     }
 

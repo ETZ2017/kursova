@@ -19,7 +19,7 @@ public class ImpressarioServiceImpl implements IImpressarioService {
     }
 
     @Override
-    public Impressario get(String key) {
+    public Impressario get(String id) {
         return null;
     }
 

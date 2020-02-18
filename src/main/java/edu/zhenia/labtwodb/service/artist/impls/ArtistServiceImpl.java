@@ -19,7 +19,7 @@ public class ArtistServiceImpl implements IArtistService {
     }
 
     @Override
-    public Artist get(String key) {
+    public Artist get(String id) {
         return null;
     }
 

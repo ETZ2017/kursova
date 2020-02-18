@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Impressario {
-    private String key;
+    private String id;
     private String firstName;
     private String lastName;
     private String patronymic;
@@ -24,8 +24,8 @@ public class Impressario {
     public Impressario() {
     }
 
-    public Impressario(String key, String firstName, String lastName, String patronymic, String genre, String artist, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+    public Impressario(String id, String firstName, String lastName, String patronymic, String genre, String artist, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
@@ -52,17 +52,17 @@ public class Impressario {
         this.artist = artist;
     }
 
-    //    public String getKey() {
-//        return key;
+    //    public String getid() {
+//        return id;
 //    }
 
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -126,11 +126,11 @@ public class Impressario {
         if (this == o) return true;
         if (!(o instanceof Impressario)) return false;
         Impressario that = (Impressario) o;
-        return getKey().equals(that.getKey());
+        return getid().equals(that.getid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey());
+        return Objects.hash(getid());
     }
 }

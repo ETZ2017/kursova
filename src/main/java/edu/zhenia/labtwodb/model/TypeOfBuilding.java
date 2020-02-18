@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class TypeOfBuilding {
-    private String key;
+    private String id;
     private String type;
     private String description;
     private LocalDateTime dateCreated;
@@ -21,7 +21,7 @@ public class TypeOfBuilding {
     }
 
     public TypeOfBuilding(String key, String type, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+        this.id = key;
         this.type = type;
         this.description = description;
         this.dateCreated = dateCreated;
@@ -34,11 +34,11 @@ public class TypeOfBuilding {
     }
 
     public String getKey() {
-        return key;
+        return id;
     }
 
     public void setKey(String key) {
-        this.key = key;
+        this.id = key;
     }
 
     public String getDescription() {
@@ -78,11 +78,11 @@ public class TypeOfBuilding {
         if (this == o) return true;
         if (!(o instanceof TypeOfBuilding)) return false;
         TypeOfBuilding that = (TypeOfBuilding) o;
-        return key.equals(that.key);
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key);
+        return Objects.hash(id);
     }
 }

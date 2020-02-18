@@ -19,7 +19,7 @@ public class TypeOfBuildingDaoImplFake implements ITypeOfBuildingDao {
     }
 
     @Override
-    public TypeOfBuilding get(String key) {
+    public TypeOfBuilding get(String id) {
         return null;
     }
 

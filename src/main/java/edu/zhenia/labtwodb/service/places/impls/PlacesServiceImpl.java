@@ -19,7 +19,7 @@ public class PlacesServiceImpl implements IPlacesService {
     }
 
     @Override
-    public Places get(String key) {
+    public Places get(String id) {
         return null;
     }
 

@@ -19,7 +19,7 @@ public class CulturalBuildingDaoImplFake implements ICulturalBuildingDao {
     }
 
     @Override
-    public CulturalBuilding get(String key) {
+    public CulturalBuilding get(String id) {
         return null;
     }
 

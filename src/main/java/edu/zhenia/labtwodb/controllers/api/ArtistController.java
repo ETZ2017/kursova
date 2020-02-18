@@ -1,7 +1,7 @@
-package edu.zhenia.labtwodb.controllers.web;
+package edu.zhenia.labtwodb.controllers.api;
 
-import edu.zhenia.labtwodb.model.Event;
-import edu.zhenia.labtwodb.service.event.impls.EventServiceImpl;
+import edu.zhenia.labtwodb.model.Artist;
+import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/event")
-public class EventController {
+@RequestMapping("/api/artist")
+public class ArtistController {
+
     @Autowired
-    EventServiceImpl service;
+    ArtistServiceImpl service;
 
     @RequestMapping("/List")
-    List<Event> getall(){
+    List<Artist> getall(){
         return service.getAll();
     }
 }

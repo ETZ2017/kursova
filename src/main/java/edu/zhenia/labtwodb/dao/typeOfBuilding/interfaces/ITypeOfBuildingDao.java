@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ITypeOfBuildingDao {
     TypeOfBuilding save(TypeOfBuilding TypeOfBuilding);
-    TypeOfBuilding get(String key);
+    TypeOfBuilding get(String id);
     List<TypeOfBuilding> getAll();
     TypeOfBuilding edit(TypeOfBuilding group);
     TypeOfBuilding delete(String id);

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IGenreDao {
     Genre save(Genre Genre);
-    Genre get(String key);
+    Genre get(String id);
     List<Genre> getAll();
     Genre edit(Genre group);
     Genre delete(String id);

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IArtistDao {
     Artist save(Artist artist);
-    Artist get(String key);
+    Artist get(String id);
     List<Artist> getAll();
     Artist edit(Artist group);
     Artist delete(String id);

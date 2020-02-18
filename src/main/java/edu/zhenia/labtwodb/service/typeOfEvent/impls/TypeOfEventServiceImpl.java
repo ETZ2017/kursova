@@ -19,7 +19,7 @@ public class TypeOfEventServiceImpl implements ITypeOfEventService {
     }
 
     @Override
-    public TypeOfEvent get(String key) {
+    public TypeOfEvent get(String id) {
         return null;
     }
 

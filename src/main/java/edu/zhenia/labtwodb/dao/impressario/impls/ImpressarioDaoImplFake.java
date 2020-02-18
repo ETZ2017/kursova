@@ -19,7 +19,7 @@ public class ImpressarioDaoImplFake implements IImpressarioDao {
     }
 
     @Override
-    public Impressario get(String key) {
+    public Impressario get(String id) {
         return null;
     }
 

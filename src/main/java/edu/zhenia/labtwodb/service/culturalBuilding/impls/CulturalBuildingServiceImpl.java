@@ -19,7 +19,7 @@ public class CulturalBuildingServiceImpl implements ICulturalBuildingService {
     }
 
     @Override
-    public CulturalBuilding get(String key) {
+    public CulturalBuilding get(String id) {
         return null;
     }
 

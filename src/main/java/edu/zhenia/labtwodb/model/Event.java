@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Event {
-    private String key;
+    private String id;
     private String name;
     private String building;
     private String typeOfEvent;
@@ -22,9 +22,9 @@ public class Event {
     public Event() {
     }
 
-    public Event(String key, String name, String building, String typeOfEvent, String organizer, List artist, String contest,
+    public Event(String id, String name, String building, String typeOfEvent, String organizer, List artist, String contest,
                  LocalDateTime data,  String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+        this.id = id;
         this.name = name;
         this.building = building;
         this.typeOfEvent = typeOfEvent;
@@ -39,7 +39,7 @@ public class Event {
 
     public Event(String name, String building, String typeOfEvent, String organizer, List artist, String contest,
                  LocalDateTime data) {
-//        this.key = key;
+//        this.id = id;
         this.name = name;
         this.building = building;
         this.typeOfEvent = typeOfEvent;
@@ -50,12 +50,12 @@ public class Event {
     }
 
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -143,11 +143,11 @@ public class Event {
         if (this == o) return true;
         if (!(o instanceof Event)) return false;
         Event event = (Event) o;
-        return getKey().equals(event.getKey());
+        return getid().equals(event.getid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey());
+        return Objects.hash(getid());
     }
 }

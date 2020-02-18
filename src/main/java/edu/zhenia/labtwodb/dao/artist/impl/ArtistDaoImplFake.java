@@ -19,7 +19,7 @@ public class ArtistDaoImplFake implements IArtistDao {
     }
 
     @Override
-    public Artist get(String key) {
+    public Artist get(String id) {
         return null;
     }
 

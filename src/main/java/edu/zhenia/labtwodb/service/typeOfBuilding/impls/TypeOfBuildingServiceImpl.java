@@ -19,7 +19,7 @@ public class TypeOfBuildingServiceImpl implements ITypeOfBuildingService {
     }
 
     @Override
-    public TypeOfBuilding get(String key) {
+    public TypeOfBuilding get(String id) {
         return null;
     }
 

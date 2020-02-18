@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IContestService {
     Contest save(Contest Contest);
-    Contest get(String key);
+    Contest get(String id);
     List<Contest> getAll();
     Contest edit(Contest group);
     Contest delete(String id);

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IOrganiserDao {
     Organiser save(Organiser Organiser);
-    Organiser get(String key);
+    Organiser get(String id);
     List<Organiser> getAll();
     Organiser edit(Organiser group);
     Organiser delete(String id);

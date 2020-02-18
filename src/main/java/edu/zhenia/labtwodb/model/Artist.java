@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Artist {
-    private String key;
+    private String id;
     private String firstName;
     private String lastName;
     private String patronymic;
@@ -17,8 +17,8 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String key, String firstName, String lastName, String patronymic, String genre, String impressario, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+    public Artist(String id, String firstName, String lastName, String patronymic, String genre, String impressario, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
@@ -30,7 +30,7 @@ public class Artist {
     }
 
     public Artist(String firstName, String lastName, String patronymic, String genre, String impressario) {
-       // this.key = createID();
+       // this.id = createID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
@@ -38,12 +38,12 @@ public class Artist {
         this.impressario = impressario;
     }
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -115,11 +115,11 @@ public class Artist {
         if (this == o) return true;
         if (!(o instanceof Artist)) return false;
         Artist artist = (Artist) o;
-        return getKey().equals(artist.getKey());
+        return getid().equals(artist.getid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey());
+        return Objects.hash(getid());
     }
 }

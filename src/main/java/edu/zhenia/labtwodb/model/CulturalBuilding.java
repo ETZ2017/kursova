@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class CulturalBuilding {
-    private String key;
+    private String id;
     private String name;
     private String type;
     private String specials;
@@ -22,8 +22,8 @@ public class CulturalBuilding {
     public CulturalBuilding() {
     }
 
-    public CulturalBuilding(String key, String name, String type, String specials, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+    public CulturalBuilding(String id, String name, String type, String specials, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.specials = specials;
@@ -32,12 +32,12 @@ public class CulturalBuilding {
         this.dateModified = dateModified;
     }
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -93,11 +93,11 @@ public class CulturalBuilding {
         if (this == o) return true;
         if (!(o instanceof CulturalBuilding)) return false;
         CulturalBuilding that = (CulturalBuilding) o;
-        return getKey().equals(that.getKey());
+        return getid().equals(that.getid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey());
+        return Objects.hash(getid());
     }
 }

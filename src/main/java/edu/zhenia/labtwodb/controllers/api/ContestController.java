@@ -1,7 +1,7 @@
-package edu.zhenia.labtwodb.controllers.web;
+package edu.zhenia.labtwodb.controllers.api;
 
-import edu.zhenia.labtwodb.model.Impressario;
-import edu.zhenia.labtwodb.service.impressario.impls.ImpressarioServiceImpl;
+import edu.zhenia.labtwodb.model.Contest;
+import edu.zhenia.labtwodb.service.contest.impls.ContestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/impressario")
-public class ImpressarioController {
+@RequestMapping("/api/contest")
+public class ContestController {
     @Autowired
-    ImpressarioServiceImpl service;
+    ContestServiceImpl service;
 
     @RequestMapping("/List")
-    List<Impressario> getall(){
+    List<Contest> getall(){
         return service.getAll();
     }
 }

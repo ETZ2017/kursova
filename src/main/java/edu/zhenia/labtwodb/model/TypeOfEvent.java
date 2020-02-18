@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class TypeOfEvent {
-    private String key;
+    private String id;
     private String type;
     private String description;
     private LocalDateTime dateCreated;
@@ -13,8 +13,8 @@ public class TypeOfEvent {
     public TypeOfEvent() {
     }
 
-    public TypeOfEvent(String key, String type, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+    public TypeOfEvent(String id, String type, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.type = type;
         this.description = description;
         this.dateCreated = dateCreated;
@@ -23,15 +23,15 @@ public class TypeOfEvent {
 
     public TypeOfEvent(String type) {
         this.type = type;
-        //this.key = createID();
+        //this.id = createID();
     }
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -71,11 +71,11 @@ public class TypeOfEvent {
         if (this == o) return true;
         if (!(o instanceof TypeOfEvent)) return false;
         TypeOfEvent that = (TypeOfEvent) o;
-        return key.equals(that.key);
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key);
+        return Objects.hash(id);
     }
 }

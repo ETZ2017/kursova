@@ -19,7 +19,7 @@ public class WinnersDaoImplFake implements IWinnersDao {
     }
 
     @Override
-    public Winners get(String key) {
+    public Winners get(String id) {
         return null;
     }
 

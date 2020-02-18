@@ -19,7 +19,7 @@ public class ContestDaoImplFake implements IContestDao {
     }
 
     @Override
-    public Contest get(String key) {
+    public Contest get(String id) {
         return null;
     }
 

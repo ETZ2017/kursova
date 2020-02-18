@@ -19,7 +19,7 @@ public class TypeOfEventDaoImplFake implements ITypeOfEventDao {
     }
 
     @Override
-    public TypeOfEvent get(String key) {
+    public TypeOfEvent get(String id) {
         return null;
     }
 

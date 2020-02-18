@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Winners {
-    private String key;
+    private String id;
     private String place;
     private String contest;
     private String artist;
@@ -16,9 +16,9 @@ public class Winners {
     public Winners() {
     }
 
-    public Winners(String key, String place, String contest, String artist, String description, LocalDateTime dateCreated,
+    public Winners(String id, String place, String contest, String artist, String description, LocalDateTime dateCreated,
                    LocalDateTime dateModified) {
-        this.key = key;
+        this.id = id;
         this.place = place;
         this.contest = contest;
         this.artist = artist;
@@ -41,12 +41,12 @@ public class Winners {
         this.contest = contest;
     }
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -94,11 +94,11 @@ public class Winners {
         if (this == o) return true;
         if (!(o instanceof Winners)) return false;
         Winners winners = (Winners) o;
-        return key.equals(winners.key);
+        return id.equals(winners.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key);
+        return Objects.hash(id);
     }
 }

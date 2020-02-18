@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Organiser {
-    private String  key;
+    private String  id;
     private String firstName;
     private String lastName;
     private String patronymic;
@@ -16,9 +16,9 @@ public class Organiser {
     public Organiser() {
     }
 
-    public Organiser(String key, String firstName, String lastName, String patronymic, String description,
+    public Organiser(String id, String firstName, String lastName, String patronymic, String description,
                      LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
@@ -28,23 +28,23 @@ public class Organiser {
     }
 
     public Organiser(String firstName, String lastName, String patronymic) {
-        //this.key = createID();
+        //this.id = createID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
     }
 
-//    public long getKey() {
-//        return key;
+//    public long getid() {
+//        return id;
 //    }
 
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -100,11 +100,11 @@ public class Organiser {
         if (this == o) return true;
         if (!(o instanceof Organiser)) return false;
         Organiser organiser = (Organiser) o;
-        return getKey().equals(organiser.getKey());
+        return getid().equals(organiser.getid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey());
+        return Objects.hash(getid());
     }
 }

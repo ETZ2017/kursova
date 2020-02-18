@@ -19,7 +19,7 @@ public class GenreServiceImpl implements IGenreService {
     }
 
     @Override
-    public Genre get(String key) {
+    public Genre get(String id) {
         return null;
     }
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ITypeOfEventService {
     TypeOfEvent save(TypeOfEvent TypeOfEvent);
-    TypeOfEvent get(String key);
+    TypeOfEvent get(String id);
     List<TypeOfEvent> getAll();
     TypeOfEvent edit(TypeOfEvent group);
     TypeOfEvent delete(String id);

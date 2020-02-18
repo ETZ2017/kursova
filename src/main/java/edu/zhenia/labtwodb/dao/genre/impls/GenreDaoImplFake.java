@@ -19,7 +19,7 @@ public class GenreDaoImplFake implements IGenreDao {
     }
 
     @Override
-    public Genre get(String key) {
+    public Genre get(String id) {
         return null;
     }
 

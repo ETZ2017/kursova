@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IPlacesDao {
     Places save(Places Places);
-    Places get(String key);
+    Places get(String id);
     List<Places> getAll();
     Places edit(Places group);
     Places delete(String id);

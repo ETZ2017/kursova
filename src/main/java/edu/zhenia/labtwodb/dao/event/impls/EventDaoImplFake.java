@@ -19,7 +19,7 @@ public class EventDaoImplFake implements IEventDao {
     }
 
     @Override
-    public Event get(String key) {
+    public Event get(String id) {
         return null;
     }
 

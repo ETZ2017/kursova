@@ -19,7 +19,7 @@ public class SpecialFeaturesServiceImpl implements ISpecialFeaturesService {
     }
 
     @Override
-    public SpecialFeatures get(String key) {
+    public SpecialFeatures get(String id) {
         return null;
     }
 

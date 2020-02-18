@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ICulturalBuildingDao {
     CulturalBuilding save(CulturalBuilding CulturalBuilding);
-    CulturalBuilding get(String key);
+    CulturalBuilding get(String id);
     List<CulturalBuilding> getAll();
     CulturalBuilding edit(CulturalBuilding group);
     CulturalBuilding delete(String id);

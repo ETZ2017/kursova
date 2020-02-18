@@ -19,7 +19,7 @@ public class PlacesDaoImplFake implements IPlacesDao {
     }
 
     @Override
-    public Places get(String key) {
+    public Places get(String id) {
         return null;
     }
 

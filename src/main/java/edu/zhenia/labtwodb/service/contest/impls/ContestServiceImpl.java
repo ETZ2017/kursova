@@ -19,7 +19,7 @@ public class ContestServiceImpl implements IContestService {
     }
 
     @Override
-    public Contest get(String key) {
+    public Contest get(String id) {
         return null;
     }
 

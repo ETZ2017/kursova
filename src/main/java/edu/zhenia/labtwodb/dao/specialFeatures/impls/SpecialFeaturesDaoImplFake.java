@@ -19,7 +19,7 @@ public class SpecialFeaturesDaoImplFake implements ISpecialFeaturesDao {
     }
 
     @Override
-    public SpecialFeatures get(String key) {
+    public SpecialFeatures get(String id) {
         return null;
     }
 

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Places {
-    private String key;
+    private String id;
     private String place;
     private String description;
     private LocalDateTime dateCreated;
@@ -14,8 +14,8 @@ public class Places {
     public Places() {
     }
 
-    public Places(String key, String place, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+    public Places(String id, String place, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.place = place;
         this.description = description;
         this.dateCreated = dateCreated;
@@ -26,12 +26,12 @@ public class Places {
         this.place = place;
     }
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -71,11 +71,11 @@ public class Places {
         if (this == o) return true;
         if (!(o instanceof Places)) return false;
         Places places = (Places) o;
-        return getKey().equals(places.getKey());
+        return getid().equals(places.getid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey());
+        return Objects.hash(getid());
     }
 }

@@ -19,7 +19,7 @@ public class WinnersServiceImpl implements IWinnersService {
     }
 
     @Override
-    public Winners get(String key) {
+    public Winners get(String id) {
         return null;
     }
 

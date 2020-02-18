@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Contest {
-    private String key;
+    private String id;
     private String name;
     private String description;
     private LocalDateTime dateCreated;
@@ -15,23 +15,23 @@ public class Contest {
 
     public Contest(String name) {
         this.name = name;
-       // this.key = createID();
+       // this.id = createID();
     }
 
-    public Contest(String key, String name, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.key = key;
+    public Contest(String id, String name, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
     }
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -71,11 +71,11 @@ public class Contest {
         if (this == o) return true;
         if (!(o instanceof Contest)) return false;
         Contest contest = (Contest) o;
-        return getKey().equals(contest.getKey());
+        return getid().equals(contest.getid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey());
+        return Objects.hash(getid());
     }
 }

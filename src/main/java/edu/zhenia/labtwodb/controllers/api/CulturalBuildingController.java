@@ -1,4 +1,4 @@
-package edu.zhenia.labtwodb.controllers.web;
+package edu.zhenia.labtwodb.controllers.api;
 
 import edu.zhenia.labtwodb.model.CulturalBuilding;
 import edu.zhenia.labtwodb.service.culturalBuilding.impls.CulturalBuildingServiceImpl;

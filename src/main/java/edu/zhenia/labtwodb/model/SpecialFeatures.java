@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class SpecialFeatures {
-    private String key;
+    private String id;
     private String type;
     private String value;
     private String description;
@@ -15,9 +15,9 @@ public class SpecialFeatures {
     public SpecialFeatures() {
     }
 
-    public SpecialFeatures(String key, String type, String value, String description, LocalDateTime dateCreated,
+    public SpecialFeatures(String id, String type, String value, String description, LocalDateTime dateCreated,
                            LocalDateTime dateModified) {
-        this.key = key;
+        this.id = id;
         this.type = type;
         this.value = value;
         this.description = description;
@@ -30,12 +30,12 @@ public class SpecialFeatures {
         this.value = value;
     }
 
-    public String getKey() {
-        return key;
+    public String getid() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -83,11 +83,11 @@ public class SpecialFeatures {
         if (this == o) return true;
         if (!(o instanceof SpecialFeatures)) return false;
         SpecialFeatures that = (SpecialFeatures) o;
-        return key.equals(that.key);
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key);
+        return Objects.hash(id);
     }
 }

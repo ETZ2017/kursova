@@ -6,7 +6,7 @@ package edu.zhenia.labtwodb.service.typeOfBuilding.interfaces;
 
 public interface ITypeOfBuildingService {
     TypeOfBuilding save(TypeOfBuilding TypeOfBuilding);
-    TypeOfBuilding get(String key);
+    TypeOfBuilding get(String id);
     List<TypeOfBuilding> getAll();
     TypeOfBuilding edit(TypeOfBuilding group);
     TypeOfBuilding delete(String id);
