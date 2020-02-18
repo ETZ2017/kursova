@@ -18,6 +18,8 @@ public class DataSet {
 
     ));
 
+
+
     private List<Artist> artists = new ArrayList<>(Arrays.asList(
             new Artist("1", "name", "last name", "patronymic", "jazz",
                     "man", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
