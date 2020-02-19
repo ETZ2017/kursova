@@ -11,11 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/artist")
 public class ArtistController {
-//for git
     @Autowired
     ArtistServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<Artist> getall(){
         return service.getAll();
     }

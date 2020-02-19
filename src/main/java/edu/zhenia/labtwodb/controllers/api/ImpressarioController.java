@@ -14,7 +14,7 @@ public class ImpressarioController {
     @Autowired
     ImpressarioServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<Impressario> getall(){
         return service.getAll();
     }

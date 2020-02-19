@@ -14,7 +14,7 @@ public class CulturalBuildingController {
     @Autowired
     CulturalBuildingServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<CulturalBuilding> getall(){
         return service.getAll();
     }

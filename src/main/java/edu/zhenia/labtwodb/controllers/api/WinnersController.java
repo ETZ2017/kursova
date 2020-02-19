@@ -14,7 +14,7 @@ public class WinnersController {
     @Autowired
     WinnersServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<Winners> getall(){
         return service.getAll();
     }

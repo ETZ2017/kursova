@@ -14,7 +14,7 @@ public class GenreController {
     @Autowired
     GenreServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<Genre> getall(){
         return service.getAll();
     }

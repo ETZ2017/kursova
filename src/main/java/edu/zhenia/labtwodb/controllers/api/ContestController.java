@@ -14,7 +14,7 @@ public class ContestController {
     @Autowired
     ContestServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<Contest> getall(){
         return service.getAll();
     }

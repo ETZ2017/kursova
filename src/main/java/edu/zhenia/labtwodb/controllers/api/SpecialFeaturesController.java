@@ -14,7 +14,7 @@ public class SpecialFeaturesController {
     @Autowired
     SpecialFeaturesServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<SpecialFeatures> getall(){
         return service.getAll();
     }

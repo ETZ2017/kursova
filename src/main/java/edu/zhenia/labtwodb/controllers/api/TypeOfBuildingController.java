@@ -14,7 +14,7 @@ public class TypeOfBuildingController {
     @Autowired
     TypeOfBuildingServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<TypeOfBuilding> getall(){
         return service.getAll();
     }

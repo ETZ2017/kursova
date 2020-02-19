@@ -14,7 +14,7 @@ public class PlacesController {
     @Autowired
     PlacesServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<Places> getall(){
         return service.getAll();
     }

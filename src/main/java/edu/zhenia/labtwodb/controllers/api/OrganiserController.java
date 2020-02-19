@@ -14,7 +14,7 @@ public class OrganiserController {
     @Autowired
     OrganiserServiceImpl service;
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     List<Organiser> getall(){
         return service.getAll();
     }
