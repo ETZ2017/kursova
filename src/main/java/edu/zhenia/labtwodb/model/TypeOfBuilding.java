@@ -10,18 +10,11 @@ public class TypeOfBuilding {
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
 
-
-//    private static long idCounter = 0;
-//
-//    private static synchronized long createID(){
-//        return idCounter++;
-//    }
-
     public TypeOfBuilding() {
     }
 
-    public TypeOfBuilding(String key, String type, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.id = key;
+    public TypeOfBuilding(String id, String type, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.type = type;
         this.description = description;
         this.dateCreated = dateCreated;
@@ -30,15 +23,15 @@ public class TypeOfBuilding {
 
     public TypeOfBuilding(String type) {
         this.type = type;
-        //this.key = createID();
+        //this.id = createID();
     }
 
-    public String getKey() {
+    public String getid() {
         return id;
     }
 
-    public void setKey(String key) {
-        this.id = key;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getDescription() {

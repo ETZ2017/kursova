@@ -4,6 +4,7 @@ import edu.zhenia.labtwodb.model.Places;
 import edu.zhenia.labtwodb.service.places.impls.PlacesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,8 @@ public class PlacesWEBController {
     PlacesServiceImpl service;
 
     @RequestMapping("/list")
-    String getall(){
+    String getall(Model model){
+        model.addAttribute("placess", service.getAll());
         return "placesList";
     }
 }

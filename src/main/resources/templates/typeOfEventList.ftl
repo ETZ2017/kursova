@@ -4,23 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Type of Event</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 <h3>Type of Event List</h3>
 <div>
-    <table border="3", bgcolor="f0f0ff"></table>
+    <table border="3"class="table table-sm table-dark">
     <tr>
         <th>id</th>
-        <th>Type<th>
+        <th>Type</th>
             <#--<th>Last Name</th>
             <th>Patronymic</th>-->
     </tr>
     <#list typeOfEvents as typeOfEvent>
-        <tr>
+        <tr class="bg-info">
             <td>${typeOfEvent.id}</td>
             <td>${typeOfEvent.type}</td>
         </tr>
     </#list>
+    </table>
 </div>
 </body>
 </html>
