@@ -1,9 +1,6 @@
 package edu.zhenia.labtwodb.service.culturalBuilding.impls;
 
-import edu.zhenia.labtwodb.dao.culturalBuilding.impls.CulturalBuildingDaoImplFake;
-import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
 import edu.zhenia.labtwodb.dao.repository.CulturalBuildingRepository;
-import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.CulturalBuilding;
 import edu.zhenia.labtwodb.service.culturalBuilding.interfaces.ICulturalBuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +11,12 @@ import java.util.List;
 
 @Service
 public class CulturalBuildingServiceImpl implements ICulturalBuildingService {
-    @Autowired
-    CulturalBuildingDaoImplFake dao;
 
     @Autowired
     CulturalBuildingRepository repository;
 
     @PostConstruct
     void init(){
-        List<CulturalBuilding> list = dao.getAll();
 
         //repository.saveAll(list);
     }

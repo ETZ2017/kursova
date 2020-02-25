@@ -1,9 +1,6 @@
 package edu.zhenia.labtwodb.service.winners.impls;
 
-import edu.zhenia.labtwodb.dao.repository.TypeOfBuildingRepository;
 import edu.zhenia.labtwodb.dao.repository.WinnersRepository;
-import edu.zhenia.labtwodb.dao.winners.impls.WinnersDaoImplFake;
-import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.model.Winners;
 import edu.zhenia.labtwodb.service.winners.interfaces.IWinnersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +11,12 @@ import java.util.List;
 
 @Service
 public class WinnersServiceImpl implements IWinnersService {
-    @Autowired
-    WinnersDaoImplFake dao;
 
     @Autowired
     WinnersRepository repository;
 
     @PostConstruct
     void init(){
-        List<Winners> list = dao.getAll();
 
         //repository.saveAll(list);
     }

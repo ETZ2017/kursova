@@ -1,9 +1,6 @@
 package edu.zhenia.labtwodb.service.organiser.impls;
 
-import edu.zhenia.labtwodb.dao.organiser.impls.OrganiserDaoImplFake;
-import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
 import edu.zhenia.labtwodb.dao.repository.OrganiserRepository;
-import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.Organiser;
 import edu.zhenia.labtwodb.service.organiser.interfaces.IOrganiserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +11,12 @@ import java.util.List;
 
 @Service
 public class OrganiserServiceImpl implements IOrganiserService {
-    @Autowired
-    OrganiserDaoImplFake dao;
 
     @Autowired
     OrganiserRepository repository;
 
     @PostConstruct
-    void init(){
-        List<Organiser> list = dao.getAll();
+    void init(){ ;
 
         //repository.saveAll(list);
     }

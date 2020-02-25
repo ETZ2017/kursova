@@ -1,9 +1,6 @@
 package edu.zhenia.labtwodb.service.typeOfEvent.impls;
 
-import edu.zhenia.labtwodb.dao.repository.TypeOfBuildingRepository;
 import edu.zhenia.labtwodb.dao.repository.TypeOfEventRepository;
-import edu.zhenia.labtwodb.dao.typeOfEvent.impls.TypeOfEventDaoImplFake;
-import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.model.TypeOfEvent;
 import edu.zhenia.labtwodb.service.typeOfEvent.interfaces.ITypeOfEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +11,12 @@ import java.util.List;
 
 @Service
 public class TypeOfEventServiceImpl implements ITypeOfEventService {
-    @Autowired
-    TypeOfEventDaoImplFake dao;
 
     @Autowired
     TypeOfEventRepository repository;
 
     @PostConstruct
     void init(){
-        List<TypeOfEvent> list = dao.getAll();
 
         //repository.saveAll(list);
     }

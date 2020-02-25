@@ -1,9 +1,6 @@
 package edu.zhenia.labtwodb.service.impressario.impls;
 
-import edu.zhenia.labtwodb.dao.impressario.impls.ImpressarioDaoImplFake;
-import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
 import edu.zhenia.labtwodb.dao.repository.ImpressarioRepository;
-import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.Impressario;
 import edu.zhenia.labtwodb.service.impressario.interfaces.IImpressarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +11,12 @@ import java.util.List;
 
 @Service
 public class ImpressarioServiceImpl implements IImpressarioService {
-    @Autowired
-    ImpressarioDaoImplFake dao;
 
     @Autowired
     ImpressarioRepository repository;
 
     @PostConstruct
     void init(){
-        List<Impressario> list = dao.getAll();
 
         //repository.saveAll(list);
     }

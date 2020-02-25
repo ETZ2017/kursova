@@ -1,9 +1,6 @@
 package edu.zhenia.labtwodb.service.genre.impls;
 
-import edu.zhenia.labtwodb.dao.genre.impls.GenreDaoImplFake;
-import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
 import edu.zhenia.labtwodb.dao.repository.GenreRepository;
-import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.Genre;
 import edu.zhenia.labtwodb.service.genre.interfaces.IGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +12,10 @@ import java.util.List;
 @Service
 public class GenreServiceImpl implements IGenreService {
     @Autowired
-    GenreDaoImplFake dao;
-
-    @Autowired
     GenreRepository repository;
 
     @PostConstruct
     void init(){
-        List<Genre> list = dao.getAll();
 
         //repository.saveAll(list);
     }
