@@ -14,6 +14,8 @@
     <tr>
         <th>id</th>
         <th>Type</th>
+        <th>Delete</th>
+        <th>Edit</th>
             <#--<th>Last Name</th>
             <th>Patronymic</th>-->
     </tr>
@@ -21,6 +23,8 @@
         <tr class="bg-info">
             <td>${typeOfEvent.id}</td>
             <td>${typeOfEvent.type}</td>
+            <td><a href="delete/${typeOfEvent.id}"><button>Delete</button></a></td>
+            <td><a href="edit/${typeOfEvent.id}"><button>Edit</button></a></td>
         </tr>
     </#list>
     </table>

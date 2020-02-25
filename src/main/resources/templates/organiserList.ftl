@@ -13,6 +13,8 @@
     <tr>
         <th>id</th>
         <th>First name</th>
+        <th>Delete</th>
+        <th>Edit</th>
             <#--<th>Last Name</th>
             <th>Patronymic</th>-->
     </tr>
@@ -20,6 +22,8 @@
         <tr class="bg-info">
             <td>${organiser.id}</td>
             <td>${organiser.firstName}</td>
+            <td><a href="delete/${organiser.id}"><button>Delete</button></a></td>
+            <td><a href="edit/${organiser.id}"><button>Edit</button></a></td>
         </tr>
     </#list>
     </table>

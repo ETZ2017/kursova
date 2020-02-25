@@ -12,6 +12,8 @@
     <tr>
         <th>id</th>
         <th>Genre</th>
+        <th>Delete</th>
+        <th>Edit</th>
             <#--<th>Last Name</th>
             <th>Patronymic</th>-->
     </tr>
@@ -19,6 +21,8 @@
         <tr class="bg-info">
             <td>${genre.id}</td>
             <td>${genre.genre}</td>
+            <td><a href="delete/${genre.id}"><button>Delete</button></a></td>
+            <td><a href="edit/${genre.id}"><button>Edit</button></a></td>
         </tr>
     </#list>
     </table>

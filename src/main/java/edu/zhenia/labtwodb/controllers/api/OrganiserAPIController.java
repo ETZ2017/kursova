@@ -1,7 +1,7 @@
 package edu.zhenia.labtwodb.controllers.api;
 
-import edu.zhenia.labtwodb.model.TypeOfEvent;
-import edu.zhenia.labtwodb.service.typeOfEvent.impls.TypeOfEventServiceImpl;
+import edu.zhenia.labtwodb.model.Organiser;
+import edu.zhenia.labtwodb.service.organiser.impls.OrganiserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/typeofevent")
-public class TypeOfEventController {
+@RequestMapping("/api/organiser")
+public class OrganiserAPIController {
     @Autowired
-    TypeOfEventServiceImpl service;
+    OrganiserServiceImpl service;
 
     @RequestMapping("/list")
-    List<TypeOfEvent> getall(){
+    List<Organiser> getall(){
         return service.getAll();
     }
 }

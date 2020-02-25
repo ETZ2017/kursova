@@ -1,11 +1,16 @@
 package edu.zhenia.labtwodb.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+@Document
 public class Event {
+    @Id
     private String id;
     private String name;
     private String building;

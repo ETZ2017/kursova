@@ -1,7 +1,7 @@
 package edu.zhenia.labtwodb.controllers.api;
 
-import edu.zhenia.labtwodb.model.Event;
-import edu.zhenia.labtwodb.service.event.impls.EventServiceImpl;
+import edu.zhenia.labtwodb.model.TypeOfBuilding;
+import edu.zhenia.labtwodb.service.typeOfBuilding.impls.TypeOfBuildingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/event")
-public class EventController {
+@RequestMapping("/api/typeofbuilding")
+public class TypeOfBuildingAPIController {
     @Autowired
-    EventServiceImpl service;
+    TypeOfBuildingServiceImpl service;
 
     @RequestMapping("/list")
-    List<Event> getall(){
+    List<TypeOfBuilding> getall(){
         return service.getAll();
     }
 }

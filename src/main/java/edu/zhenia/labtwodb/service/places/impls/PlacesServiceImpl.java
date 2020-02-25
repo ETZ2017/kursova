@@ -1,17 +1,31 @@
 package edu.zhenia.labtwodb.service.places.impls;
 
 import edu.zhenia.labtwodb.dao.places.impls.PlacesDaoImplFake;
+import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
+import edu.zhenia.labtwodb.dao.repository.PlacesRepository;
+import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.Places;
 import edu.zhenia.labtwodb.service.places.interfaces.IPlacesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
 public class PlacesServiceImpl implements IPlacesService {
     @Autowired
     PlacesDaoImplFake dao;
+
+    @Autowired
+    PlacesRepository repository;
+
+    @PostConstruct
+    void init(){
+        List<Places> list = dao.getAll();
+
+        //repository.saveAll(list);
+    }
 
     @Override
     public Places save(Places Places) {
@@ -25,7 +39,7 @@ public class PlacesServiceImpl implements IPlacesService {
 
     @Override
     public List<Places> getAll() {
-        return dao.getAll();
+        return repository.findAll();
     }
 
     @Override
@@ -35,6 +49,7 @@ public class PlacesServiceImpl implements IPlacesService {
 
     @Override
     public Places delete(String id) {
-        return null;
+        repository.deleteById(id);
+        return repository.findById(id).orElse(null);
     }
 }

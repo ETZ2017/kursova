@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/specialfeatures")
-public class SpecialFeaturesController {
+public class SpecialFeaturesAPIController {
     @Autowired
     SpecialFeaturesServiceImpl service;
 

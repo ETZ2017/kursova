@@ -14,6 +14,8 @@
     <tr >
         <th>id</th>
         <th>Place</th>
+        <th>Delete</th>
+        <th>Edit</th>
             <#--<th>Last Name</th>
             <th>Patronymic</th>-->
     </tr>
@@ -21,6 +23,8 @@
         <tr class="bg-info">
             <td>${winners.id}</td>
             <td>${winners.place}</td>
+            <td><a href="delete/${winners.id}"><button>Delete</button></a></td>
+            <td><a href="edit/${winners.id}"><button>Edit</button></a></td>
         </tr>
     </#list>
     </table>

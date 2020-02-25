@@ -1,7 +1,7 @@
 package edu.zhenia.labtwodb.controllers.api;
 
-import edu.zhenia.labtwodb.model.Genre;
-import edu.zhenia.labtwodb.service.genre.impls.GenreServiceImpl;
+import edu.zhenia.labtwodb.model.CulturalBuilding;
+import edu.zhenia.labtwodb.service.culturalBuilding.impls.CulturalBuildingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/genre")
-public class GenreController {
+@RequestMapping("/api/building")
+public class CulturalBuildingAPIController {
     @Autowired
-    GenreServiceImpl service;
+    CulturalBuildingServiceImpl service;
 
     @RequestMapping("/list")
-    List<Genre> getall(){
+    List<CulturalBuilding> getall(){
         return service.getAll();
     }
 }

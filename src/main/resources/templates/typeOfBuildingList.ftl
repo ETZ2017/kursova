@@ -13,11 +13,15 @@
     <tr>
         <th>id</th>
         <th>Type</th>
+        <th>Delete</th>
+        <th>Edit</th>
     </tr>
         <#list typeOfBuildings as typeOfBuilding>
             <tr class="bg-info">
                 <td>${typeOfBuilding.id}</td>
                 <td>${typeOfBuilding.type}</td>
+                <td><a href="delete/${typeOfBuilding.id}"><button>Delete</button></a></td>
+                <td><a href="edit/${typeOfBuilding.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>

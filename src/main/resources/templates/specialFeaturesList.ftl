@@ -13,6 +13,8 @@
     <tr>
         <th>id</th>
         <th>Type</th>
+        <th>Delete</th>
+        <th>Edit</th>
             <#--<th>Last Name</th>
             <th>Patronymic</th>-->
     </tr>
@@ -20,6 +22,8 @@
         <tr class="bg-info">
             <td>${specialFeatures.id}</td>
             <td>${specialFeatures.type}</td>
+            <td><a href="delete/${specialFeatures.id}"><button>Delete</button></a></td>
+            <td><a href="edit/${specialFeatures.id}"><button>Edit</button></a></td>
         </tr>
     </#list>
     </table>
