@@ -1,10 +1,8 @@
 package edu.zhenia.labtwodb.service.typeOfEvent.impls;
 
-import edu.zhenia.labtwodb.dao.repository.TypeOfBuildingRepository;
-import edu.zhenia.labtwodb.dao.repository.TypeOfEventRepository;
 import edu.zhenia.labtwodb.dao.typeOfEvent.impls.TypeOfEventDaoImplFake;
-import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.model.TypeOfEvent;
+import edu.zhenia.labtwodb.model.Winners;
 import edu.zhenia.labtwodb.service.typeOfEvent.interfaces.ITypeOfEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,15 +15,6 @@ public class TypeOfEventServiceImpl implements ITypeOfEventService {
     @Autowired
     TypeOfEventDaoImplFake dao;
 
-    @Autowired
-    TypeOfEventRepository repository;
-
-    @PostConstruct
-    void init(){
-        List<TypeOfEvent> list = dao.getAll();
-
-        //repository.saveAll(list);
-    }
 
     @Override
     public TypeOfEvent save(TypeOfEvent TypeOfEvent) {
@@ -34,12 +23,13 @@ public class TypeOfEventServiceImpl implements ITypeOfEventService {
 
     @Override
     public TypeOfEvent get(String id) {
-        return null;
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
     }
 
     @Override
     public List<TypeOfEvent> getAll() {
-        return repository.findAll();
+        return dao.getAll();
     }
 
     @Override
@@ -49,7 +39,8 @@ public class TypeOfEventServiceImpl implements ITypeOfEventService {
 
     @Override
     public TypeOfEvent delete(String id) {
-        repository.deleteById(id);
-        return repository.findById(id).orElse(null);
+        TypeOfEvent typeOfEvent = this.get(id);
+        dao.getAll().remove(typeOfEvent);
+        return typeOfEvent;
     }
 }

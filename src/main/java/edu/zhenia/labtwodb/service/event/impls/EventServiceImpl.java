@@ -1,10 +1,8 @@
 package edu.zhenia.labtwodb.service.event.impls;
 
 import edu.zhenia.labtwodb.dao.event.impls.EventDaoImplFake;
-import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
-import edu.zhenia.labtwodb.dao.repository.EventRepository;
-import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.Event;
+import edu.zhenia.labtwodb.model.Genre;
 import edu.zhenia.labtwodb.service.event.interfaces.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +15,6 @@ public class EventServiceImpl implements IEventService {
     @Autowired
     EventDaoImplFake dao;
 
-    @Autowired
-    EventRepository repository;
-
-    @PostConstruct
-    void init(){
-        List<Event> list = dao.getAll();
-
-        //repository.saveAll(list);
-    }
-
     @Override
     public Event save(Event Event) {
         return null;
@@ -34,12 +22,13 @@ public class EventServiceImpl implements IEventService {
 
     @Override
     public Event get(String id) {
-        return null;
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
     }
 
     @Override
     public List<Event> getAll() {
-        return repository.findAll();
+        return dao.getAll();
     }
 
     @Override
@@ -49,7 +38,8 @@ public class EventServiceImpl implements IEventService {
 
     @Override
     public Event delete(String id) {
-        repository.deleteById(id);
-        return repository.findById(id).orElse(null);
+        Event event = this.get(id);
+        dao.getAll().remove(event);
+        return event;
     }
 }

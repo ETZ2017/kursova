@@ -1,10 +1,8 @@
 package edu.zhenia.labtwodb.service.culturalBuilding.impls;
 
 import edu.zhenia.labtwodb.dao.culturalBuilding.impls.CulturalBuildingDaoImplFake;
-import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
-import edu.zhenia.labtwodb.dao.repository.CulturalBuildingRepository;
-import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.CulturalBuilding;
+import edu.zhenia.labtwodb.model.Event;
 import edu.zhenia.labtwodb.service.culturalBuilding.interfaces.ICulturalBuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +15,6 @@ public class CulturalBuildingServiceImpl implements ICulturalBuildingService {
     @Autowired
     CulturalBuildingDaoImplFake dao;
 
-    @Autowired
-    CulturalBuildingRepository repository;
-
-    @PostConstruct
-    void init(){
-        List<CulturalBuilding> list = dao.getAll();
-
-        //repository.saveAll(list);
-    }
-
     @Override
     public CulturalBuilding save(CulturalBuilding CulturalBuilding) {
         return null;
@@ -34,12 +22,13 @@ public class CulturalBuildingServiceImpl implements ICulturalBuildingService {
 
     @Override
     public CulturalBuilding get(String id) {
-        return null;
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
     }
 
     @Override
     public List<CulturalBuilding> getAll() {
-        return repository.findAll();
+        return dao.getAll();
     }
 
     @Override
@@ -49,7 +38,8 @@ public class CulturalBuildingServiceImpl implements ICulturalBuildingService {
 
     @Override
     public CulturalBuilding delete(String id) {
-        repository.deleteById(id);
-        return repository.findById(id).orElse(null);
+        CulturalBuilding culturalBuilding = this.get(id);
+        dao.getAll().remove(culturalBuilding);
+        return culturalBuilding;
     }
 }

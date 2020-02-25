@@ -1,10 +1,9 @@
 package edu.zhenia.labtwodb.service.specialFeatures.impls;
 
-import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
-import edu.zhenia.labtwodb.dao.repository.SpecialFeaturesRepository;
 import edu.zhenia.labtwodb.dao.specialFeatures.impls.SpecialFeaturesDaoImplFake;
 import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.SpecialFeatures;
+import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.service.specialFeatures.interfaces.ISpecialFeaturesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +16,6 @@ public class SpecialFeaturesServiceImpl implements ISpecialFeaturesService {
     @Autowired
     SpecialFeaturesDaoImplFake dao;
 
-    @Autowired
-    SpecialFeaturesRepository repository;
-
-    @PostConstruct
-    void init(){
-        List<SpecialFeatures> list = dao.getAll();
-
-        //repository.saveAll(list);
-    }
-
     @Override
     public SpecialFeatures save(SpecialFeatures SpecialFeatures) {
         return null;
@@ -34,12 +23,13 @@ public class SpecialFeaturesServiceImpl implements ISpecialFeaturesService {
 
     @Override
     public SpecialFeatures get(String id) {
-        return null;
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
     }
 
     @Override
-    public List<SpecialFeatures> getAll() {
-        return repository.findAll();
+    public List<SpecialFeatures> getAll()  {
+        return dao.getAll();
     }
 
     @Override
@@ -49,7 +39,8 @@ public class SpecialFeaturesServiceImpl implements ISpecialFeaturesService {
 
     @Override
     public SpecialFeatures delete(String id) {
-        repository.deleteById(id);
-        return repository.findById(id).orElse(null);
+        SpecialFeatures specialFeatures = this.get(id);
+        dao.getAll().remove(specialFeatures);
+        return specialFeatures;
     }
 }

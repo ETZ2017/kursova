@@ -1,10 +1,8 @@
 package edu.zhenia.labtwodb.service.places.impls;
 
 import edu.zhenia.labtwodb.dao.places.impls.PlacesDaoImplFake;
-import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
-import edu.zhenia.labtwodb.dao.repository.PlacesRepository;
-import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.Places;
+import edu.zhenia.labtwodb.model.SpecialFeatures;
 import edu.zhenia.labtwodb.service.places.interfaces.IPlacesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +15,6 @@ public class PlacesServiceImpl implements IPlacesService {
     @Autowired
     PlacesDaoImplFake dao;
 
-    @Autowired
-    PlacesRepository repository;
-
-    @PostConstruct
-    void init(){
-        List<Places> list = dao.getAll();
-
-        //repository.saveAll(list);
-    }
-
     @Override
     public Places save(Places Places) {
         return null;
@@ -34,12 +22,13 @@ public class PlacesServiceImpl implements IPlacesService {
 
     @Override
     public Places get(String id) {
-        return null;
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
     }
 
     @Override
     public List<Places> getAll() {
-        return repository.findAll();
+        return dao.getAll();
     }
 
     @Override
@@ -49,7 +38,8 @@ public class PlacesServiceImpl implements IPlacesService {
 
     @Override
     public Places delete(String id) {
-        repository.deleteById(id);
-        return repository.findById(id).orElse(null);
+        Places places = this.get(id);
+        dao.getAll().remove(places);
+        return places;
     }
 }

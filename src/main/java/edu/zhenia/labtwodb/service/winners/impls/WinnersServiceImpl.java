@@ -1,9 +1,6 @@
 package edu.zhenia.labtwodb.service.winners.impls;
 
-import edu.zhenia.labtwodb.dao.repository.TypeOfBuildingRepository;
-import edu.zhenia.labtwodb.dao.repository.WinnersRepository;
 import edu.zhenia.labtwodb.dao.winners.impls.WinnersDaoImplFake;
-import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.model.Winners;
 import edu.zhenia.labtwodb.service.winners.interfaces.IWinnersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +14,6 @@ public class WinnersServiceImpl implements IWinnersService {
     @Autowired
     WinnersDaoImplFake dao;
 
-    @Autowired
-    WinnersRepository repository;
-
-    @PostConstruct
-    void init(){
-        List<Winners> list = dao.getAll();
-
-        //repository.saveAll(list);
-    }
-
     @Override
     public Winners save(Winners Winners) {
         return null;
@@ -34,12 +21,13 @@ public class WinnersServiceImpl implements IWinnersService {
 
     @Override
     public Winners get(String id) {
-        return null;
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
     }
 
     @Override
     public List<Winners> getAll() {
-        return repository.findAll();
+        return dao.getAll();
     }
 
     @Override
@@ -49,7 +37,8 @@ public class WinnersServiceImpl implements IWinnersService {
 
     @Override
     public Winners delete(String id) {
-        repository.deleteById(id);
-        return repository.findById(id).orElse(null);
+        Winners winners = this.get(id);
+        dao.getAll().remove(winners);
+        return winners;
     }
 }
