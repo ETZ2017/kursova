@@ -16,7 +16,7 @@ public class Event {
     private String building;
     private String typeOfEvent;
     private String organizer;
-    private List artist;
+    //private List artist;
     private String contest;
     private LocalDateTime data;
     private String description;
@@ -27,14 +27,14 @@ public class Event {
     public Event() {
     }
 
-    public Event(String id, String name, String building, String typeOfEvent, String organizer, List artist, String contest,
+    public Event(String id, String name, String building, String typeOfEvent, String organizer, String contest,
                  LocalDateTime data,  String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.name = name;
         this.building = building;
         this.typeOfEvent = typeOfEvent;
         this.organizer = organizer;
-        this.artist = artist;
+        //this.artist = artist;
         this.contest = contest;
         this.data = data;
         this.description = description;
@@ -42,14 +42,14 @@ public class Event {
         this.dateModified = dateModified;
     }
 
-    public Event(String name, String building, String typeOfEvent, String organizer, List artist, String contest,
+    public Event(String name, String building, String typeOfEvent, String organizer, String contest,
                  LocalDateTime data) {
 //        this.id = id;
         this.name = name;
         this.building = building;
         this.typeOfEvent = typeOfEvent;
         this.organizer = organizer;
-        this.artist = artist;
+        //this.artist = artist;
         this.contest = contest;
         this.data = data;
     }
@@ -119,13 +119,13 @@ public class Event {
         this.organizer = organizer;
     }
 
-    public List getArtist() {
+    /*public List getArtist() {
         return artist;
     }
 
     public void setArtist(List artist) {
         this.artist = artist;
-    }
+    }*/
 
     public String getContest() {
         return contest;
