@@ -39,13 +39,17 @@ public class DataSet {
 
     ));
 
-    List<String> artist = new ArrayList<>(Arrays.asList("one", "two"));
+   // List<String> artist = new ArrayList<>(Arrays.asList("one", "two"));
 
     private List<Event> events = new ArrayList<>(Arrays.asList(
-            new Event("1", "name", "building", "type", "organiser",
-                    artist, "some", LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now()),
-            new Event("2", "name", "building", "type", "organiser",
-                    artist, "some", LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now())
+            new Event("1", "name", "building", "type", "organiser", "some", LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now()),
+            new Event("2", "name", "building", "type", "organiser", "some", LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now())
+
+    ));
+
+    private List<ArtistAtEvent> artistAtEvents = new ArrayList<>(Arrays.asList(
+            new ArtistAtEvent("1", new Artist("1", "name", "last name", "patronymic", "jazz",
+                    "man", "qwerty", LocalDateTime.now(), LocalDateTime.now()), new Event("2", "name", "building", "type", "organiser", "some", LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now()))
 
     ));
 
@@ -89,6 +93,14 @@ public class DataSet {
             new TypeOfEvent("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
             new TypeOfEvent("2", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now())
     ));
+
+    public List<ArtistAtEvent> getArtistAtEvents() {
+        return artistAtEvents;
+    }
+
+    public void setArtistAtEvents(List<ArtistAtEvent> artistAtEvents) {
+        this.artistAtEvents = artistAtEvents;
+    }
 
     public List<TypeOfEvent> getTypeOfEvents() {
         return TypeOfEvents;
