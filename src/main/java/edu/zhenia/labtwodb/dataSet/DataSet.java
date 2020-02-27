@@ -49,7 +49,8 @@ public class DataSet {
 
     private List<ArtistAtEvent> artistAtEvents = new ArrayList<>(Arrays.asList(
             new ArtistAtEvent("1", new Artist("1", "name", "last name", "patronymic", "jazz",
-                    "man", "qwerty", LocalDateTime.now(), LocalDateTime.now()), new Event("2", "name", "building", "type", "organiser", "some", LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now()))
+                    "man", "qwerty", LocalDateTime.now(), LocalDateTime.now()), new Event("2", "name", "building", "type", "organiser", "some", LocalDateTime.now(),"qwerty",
+                    LocalDateTime.now(), LocalDateTime.now()),  new Contest("1", "name", "description", LocalDateTime.now(), LocalDateTime.now()), LocalDateTime.now())
 
     ));
 

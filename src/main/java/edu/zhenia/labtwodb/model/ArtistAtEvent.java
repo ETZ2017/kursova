@@ -7,21 +7,18 @@ public class ArtistAtEvent {
     private String id;
     private Artist artist;
     private Event event;
+    private Contest contest;
     private LocalDateTime date;
 
-    public ArtistAtEvent(String id, Artist artist, Event event) {
-        this.id = id;
-        this.artist = artist;
-        this.event = event;
-    }
 
     public ArtistAtEvent() {
     }
 
-    public ArtistAtEvent(String id, Artist artist, Event event, LocalDateTime date) {
+    public ArtistAtEvent(String id, Artist artist, Event event, Contest contest, LocalDateTime date) {
         this.id = id;
         this.artist = artist;
         this.event = event;
+        this.contest = contest;
         this.date = date;
     }
 
@@ -35,6 +32,14 @@ public class ArtistAtEvent {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public Contest getContest() {
+        return contest;
+    }
+
+    public void setContest(Contest contest) {
+        this.contest = contest;
     }
 
     public void setDate(LocalDateTime date) {
