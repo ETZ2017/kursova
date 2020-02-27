@@ -5,24 +5,19 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class ArtistAtEvent {
+public class ArtistInGenre {
     @Id
     private String id;
     private Artist artist;
-    private Event event;
-    private Contest contest;
-    private LocalDateTime date;
+    private Genre genre;
 
-
-    public ArtistAtEvent() {
+    public ArtistInGenre() {
     }
 
-    public ArtistAtEvent(String id, Artist artist, Event event, Contest contest, LocalDateTime date) {
+    public ArtistInGenre(String id, Artist artist, Genre genre) {
         this.id = id;
         this.artist = artist;
-        this.event = event;
-        this.contest = contest;
-        this.date = date;
+        this.genre = genre;
     }
 
     public String getId() {
@@ -33,22 +28,6 @@ public class ArtistAtEvent {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public Contest getContest() {
-        return contest;
-    }
-
-    public void setContest(Contest contest) {
-        this.contest = contest;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
     public Artist getArtist() {
         return artist;
     }
@@ -57,19 +36,19 @@ public class ArtistAtEvent {
         this.artist = artist;
     }
 
-    public Event getEvent() {
-        return event;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ArtistAtEvent that = (ArtistAtEvent) o;
+        ArtistInGenre that = (ArtistInGenre) o;
         return id.equals(that.id);
     }
 

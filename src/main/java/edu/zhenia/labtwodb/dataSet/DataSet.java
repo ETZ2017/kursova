@@ -47,6 +47,12 @@ public class DataSet {
 
     ));
 
+    private List<ArtistInGenre> artistInGenres = new ArrayList<>(Arrays.asList(
+           new ArtistInGenre("1", new Artist("1", "name", "last name", "patronymic", "jazz",
+                   "man", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
+                   new Genre("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()))
+    ));
+
     private List<ArtistAtEvent> artistAtEvents = new ArrayList<>(Arrays.asList(
             new ArtistAtEvent("1", new Artist("1", "name", "last name", "patronymic", "jazz",
                     "man", "qwerty", LocalDateTime.now(), LocalDateTime.now()), new Event("2", "name", "building", "type", "organiser", "some", LocalDateTime.now(),"qwerty",
@@ -97,6 +103,14 @@ public class DataSet {
 
     public List<ArtistAtEvent> getArtistAtEvents() {
         return artistAtEvents;
+    }
+
+    public List<ArtistInGenre> getArtistInGenres() {
+        return artistInGenres;
+    }
+
+    public void setArtistInGenres(List<ArtistInGenre> artistInGenres) {
+        this.artistInGenres = artistInGenres;
     }
 
     public void setArtistAtEvents(List<ArtistAtEvent> artistAtEvents) {
