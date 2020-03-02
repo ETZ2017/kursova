@@ -1,18 +1,21 @@
 package edu.zhenia.labtwodb.service.artistInGenre.impls;
 
-import edu.zhenia.labtwodb.dao.repository.ArtistAtEventRepository;
+import edu.zhenia.labtwodb.dao.repository.ArtistInGenreRepository;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
+import edu.zhenia.labtwodb.model.ArtistInGenre;
 import edu.zhenia.labtwodb.service.artistAtEvent.interfaces.IArtistAtEventService;
+import edu.zhenia.labtwodb.service.artistInGenre.interfaces.IArtistInGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ArtistInGenreServiceImpl implements IArtistAtEventService {
+public class ArtistInGenreServiceImpl implements IArtistInGenreService {
     @Autowired
-    ArtistAtEventRepository repository;
+    ArtistInGenreRepository repository;
 
     @PostConstruct
     void init(){
@@ -21,27 +24,32 @@ public class ArtistInGenreServiceImpl implements IArtistAtEventService {
     }
 
     @Override
-    public ArtistAtEvent save(ArtistAtEvent artistAtEvent) {
-        return null;
+    public ArtistInGenre save(ArtistInGenre artistInGenre) {
+        artistInGenre.setDateCreated(LocalDateTime.now());
+        artistInGenre.setDateModified(LocalDateTime.now());
+        return repository.save(artistInGenre);
     }
 
     @Override
-    public ArtistAtEvent get(String id) {
-        return null;
+    public ArtistInGenre get(String id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<ArtistAtEvent> getAll() {
-        return repository.findAll();
+    public List<ArtistInGenre> getAll() {
+            return repository.findAll();
     }
 
     @Override
-    public ArtistAtEvent edit(ArtistAtEvent group) {
-        return null;
+    public ArtistInGenre edit(ArtistInGenre artistInGenre) {
+        artistInGenre.setDateModified(LocalDateTime.now());
+        return repository.save(artistInGenre);
     }
 
     @Override
-    public ArtistAtEvent delete(String id) {
-        return null;
+    public ArtistInGenre delete(String id) {
+        ArtistInGenre artist = repository.findById(id).orElse(null);
+        repository.deleteById(id);
+        return artist;
     }
 }

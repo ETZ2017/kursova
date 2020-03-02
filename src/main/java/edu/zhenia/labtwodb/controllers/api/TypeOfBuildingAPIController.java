@@ -1,10 +1,9 @@
 package edu.zhenia.labtwodb.controllers.api;
 
-import edu.zhenia.labtwodb.model.TypeOfBuilding;
+import edu.zhenia.labtwodb.model.*;
 import edu.zhenia.labtwodb.service.typeOfBuilding.impls.TypeOfBuildingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,5 +16,25 @@ public class TypeOfBuildingAPIController {
     @RequestMapping("/list")
     List<TypeOfBuilding> getall(){
         return service.getAll();
+    }
+
+    @RequestMapping("getbyid/{id}")
+    TypeOfBuilding get(@PathVariable("id") String id){
+        return service.get(id);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    TypeOfBuilding edit(@RequestBody TypeOfBuilding typeOfBuilding){
+        return service.save(typeOfBuilding);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    TypeOfBuilding create(@RequestBody TypeOfBuilding typeOfBuilding){
+        return service.save(typeOfBuilding);
+    }
+
+    @RequestMapping("/delete/{id}")
+    TypeOfBuilding delete(@PathVariable("id") String id) {
+        return service.delete(id);
     }
 }

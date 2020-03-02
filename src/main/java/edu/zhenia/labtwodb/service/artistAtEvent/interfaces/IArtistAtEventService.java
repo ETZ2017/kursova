@@ -1,7 +1,7 @@
 package edu.zhenia.labtwodb.service.artistAtEvent.interfaces;
 
-import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
+import edu.zhenia.labtwodb.model.ArtistInGenre;
 
 import java.util.List;
 

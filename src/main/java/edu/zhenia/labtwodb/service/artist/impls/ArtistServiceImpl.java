@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,12 +24,14 @@ public class ArtistServiceImpl implements IArtistService {
 
     @Override
     public Artist save(Artist artist) {
-        return null;
+        artist.setDateCreated(LocalDateTime.now());
+        artist.setDateModified(LocalDateTime.now());
+        return repository.save(artist);
     }
 
     @Override
     public Artist get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -37,13 +40,15 @@ public class ArtistServiceImpl implements IArtistService {
     }
 
     @Override
-    public Artist edit(Artist group) {
-        return null;
+    public Artist edit(Artist artist) {
+        artist.setDateModified(LocalDateTime.now());
+        return repository.save(artist);
     }
 
     @Override
     public Artist delete(String id) {
+        Artist artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
-        return repository.findById(id).orElse(null);
+        return artist;
     }
 }

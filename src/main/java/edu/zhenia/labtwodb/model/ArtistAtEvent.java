@@ -12,6 +12,8 @@ public class ArtistAtEvent {
     private Event event;
     private Contest contest;
     private LocalDateTime date;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateModified;
 
     public ArtistAtEvent(String id, Artist artist, Event event, Contest contest, LocalDateTime date) {
         this.id = id;
@@ -22,6 +24,32 @@ public class ArtistAtEvent {
     }
 
     public ArtistAtEvent() {
+    }
+
+    public ArtistAtEvent(String id, Artist artist, Event event, Contest contest, LocalDateTime date, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
+        this.artist = artist;
+        this.event = event;
+        this.contest = contest;
+        this.date = date;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+    }
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public LocalDateTime getDateModified() {
+        return dateModified;
+    }
+
+    public void setDateModified(LocalDateTime dateModified) {
+        this.dateModified = dateModified;
     }
 
     public Contest getContest() {
