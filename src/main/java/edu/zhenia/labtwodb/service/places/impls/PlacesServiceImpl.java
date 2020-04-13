@@ -1,5 +1,7 @@
 package edu.zhenia.labtwodb.service.places.impls;
 
+import edu.zhenia.labtwodb.dao.organiser.impls.OrganiserImplFake;
+import edu.zhenia.labtwodb.dao.places.impls.PlacesImplFake;
 import edu.zhenia.labtwodb.dao.repository.PlacesRepository;
 import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
@@ -21,6 +23,42 @@ import java.util.List;
 public class PlacesServiceImpl implements IPlacesService {
 
     @Autowired
+    PlacesImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public Places save(Places artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public Places get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Places> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public Places edit(Places group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public Places delete(String id) {
+        Places artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+    /*@Autowired
     PlacesRepository repository;
 
     @PostConstruct
@@ -57,7 +95,7 @@ public class PlacesServiceImpl implements IPlacesService {
         Places artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<Places> search(String word){
         List<Places> placess = this.getAll();

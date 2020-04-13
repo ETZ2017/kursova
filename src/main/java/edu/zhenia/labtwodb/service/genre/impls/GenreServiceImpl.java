@@ -1,5 +1,7 @@
 package edu.zhenia.labtwodb.service.genre.impls;
 
+import edu.zhenia.labtwodb.dao.event.impls.EventImplFake;
+import edu.zhenia.labtwodb.dao.genre.impls.GenreImplFake;
 import edu.zhenia.labtwodb.dao.repository.GenreRepository;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.Contest;
@@ -20,6 +22,42 @@ import java.util.List;
 @Service
 public class GenreServiceImpl implements IGenreService {
     @Autowired
+    GenreImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public Genre save(Genre artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public Genre get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Genre> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public Genre edit(Genre group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public Genre delete(String id) {
+        Genre artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+    /*@Autowired
     GenreRepository repository;
 
     @PostConstruct
@@ -56,7 +94,7 @@ public class GenreServiceImpl implements IGenreService {
         Genre artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<Genre> search(String word){
         List<Genre> genres = this.getAll();

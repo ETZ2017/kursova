@@ -1,6 +1,8 @@
 package edu.zhenia.labtwodb.service.typeOfBuilding.impls;
 
 import edu.zhenia.labtwodb.dao.repository.TypeOfBuildingRepository;
+import edu.zhenia.labtwodb.dao.specialFeatures.impls.SpecialFeaturesImplFake;
+import edu.zhenia.labtwodb.dao.typeOfBuilding.impls.TypeOfBuildingImplFake;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.SpecialFeatures;
 import edu.zhenia.labtwodb.model.TypeOfBuilding;
@@ -20,6 +22,42 @@ import java.util.List;
 public class TypeOfBuildingServiceImpl implements ITypeOfBuildingService {
 
     @Autowired
+    TypeOfBuildingImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public TypeOfBuilding save(TypeOfBuilding artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public TypeOfBuilding get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<TypeOfBuilding> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public TypeOfBuilding edit(TypeOfBuilding group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public TypeOfBuilding delete(String id) {
+        TypeOfBuilding artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+    /*@Autowired
     TypeOfBuildingRepository repository;
 
     @PostConstruct
@@ -56,7 +94,7 @@ public class TypeOfBuildingServiceImpl implements ITypeOfBuildingService {
         TypeOfBuilding artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<TypeOfBuilding> searchByType(String word) {
         List<TypeOfBuilding> typeOfBuildings = this.getAll();

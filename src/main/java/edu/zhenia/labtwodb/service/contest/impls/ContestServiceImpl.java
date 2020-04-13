@@ -1,8 +1,11 @@
 package edu.zhenia.labtwodb.service.contest.impls;
 
+import edu.zhenia.labtwodb.dao.artistInGenre.impls.ArtistInGenreImplFake;
+import edu.zhenia.labtwodb.dao.contest.impls.ContestImplFake;
 import edu.zhenia.labtwodb.dao.repository.ContestRepository;
 import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
+import edu.zhenia.labtwodb.model.ArtistInGenre;
 import edu.zhenia.labtwodb.model.Contest;
 import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
 import edu.zhenia.labtwodb.service.contest.interfaces.IContestService;
@@ -20,6 +23,43 @@ import java.util.List;
 public class ContestServiceImpl implements IContestService {
 
     @Autowired
+    ContestImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public Contest save(Contest artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public Contest get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Contest> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public Contest edit(Contest group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public Contest delete(String id) {
+        Contest artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+    /*@Autowired
     ContestRepository repository;
 
     @PostConstruct
@@ -56,7 +96,7 @@ public class ContestServiceImpl implements IContestService {
         Contest artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<Contest> search(String word){
         List<Contest> contests = this.getAll();

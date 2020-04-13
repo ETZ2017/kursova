@@ -1,5 +1,7 @@
 package edu.zhenia.labtwodb.service.culturalBuilding.impls;
 
+import edu.zhenia.labtwodb.dao.contest.impls.ContestImplFake;
+import edu.zhenia.labtwodb.dao.culturalBuilding.impls.CulturalBuildingImplFake;
 import edu.zhenia.labtwodb.dao.repository.CulturalBuildingRepository;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.ArtistInGenre;
@@ -21,6 +23,43 @@ import java.util.List;
 public class CulturalBuildingServiceImpl implements ICulturalBuildingService {
 
     @Autowired
+    CulturalBuildingImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public CulturalBuilding save(CulturalBuilding artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public CulturalBuilding get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<CulturalBuilding> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public CulturalBuilding edit(CulturalBuilding group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public CulturalBuilding delete(String id) {
+        CulturalBuilding artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+    /*@Autowired
     CulturalBuildingRepository repository;
 
     @PostConstruct
@@ -57,7 +96,7 @@ public class CulturalBuildingServiceImpl implements ICulturalBuildingService {
         CulturalBuilding artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<CulturalBuilding> searchByType(String word) {
         List<CulturalBuilding> culturalBuildings = this.getAll();

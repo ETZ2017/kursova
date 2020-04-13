@@ -1,5 +1,7 @@
 package edu.zhenia.labtwodb.service.organiser.impls;
 
+import edu.zhenia.labtwodb.dao.impressario.impls.ImpressarioImplFake;
+import edu.zhenia.labtwodb.dao.organiser.impls.OrganiserImplFake;
 import edu.zhenia.labtwodb.dao.repository.OrganiserRepository;
 import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
@@ -19,8 +21,44 @@ import java.util.List;
 
 @Service
 public class OrganiserServiceImpl implements IOrganiserService {
-
     @Autowired
+    OrganiserImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public Organiser save(Organiser artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public Organiser get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Organiser> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public Organiser edit(Organiser group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public Organiser delete(String id) {
+        Organiser artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+    /*@Autowired
     OrganiserRepository repository;
 
     @PostConstruct
@@ -57,7 +95,7 @@ public class OrganiserServiceImpl implements IOrganiserService {
         Organiser artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<Organiser> search(String word){
         List<Organiser> organisers = this.getAll();

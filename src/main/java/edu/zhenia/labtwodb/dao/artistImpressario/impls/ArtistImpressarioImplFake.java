@@ -3,9 +3,11 @@ package edu.zhenia.labtwodb.dao.artistImpressario.impls;
 import edu.zhenia.labtwodb.dao.artistImpressario.interfaces.IArtistImpressarioDao;
 import edu.zhenia.labtwodb.model.ArtistImpressario;
 import edu.zhenia.labtwodb.service.artistImpressario.impls.ArtistImpressarioServiceImpl;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ArtistImpressarioImplFake implements IArtistImpressarioDao {
     ArtistImpressarioServiceImpl service;
     @Override

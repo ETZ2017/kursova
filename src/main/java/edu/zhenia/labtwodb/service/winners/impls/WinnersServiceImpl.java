@@ -1,6 +1,8 @@
 package edu.zhenia.labtwodb.service.winners.impls;
 
 import edu.zhenia.labtwodb.dao.repository.WinnersRepository;
+import edu.zhenia.labtwodb.dao.typeOfEvent.impls.TypeOfEventImplFake;
+import edu.zhenia.labtwodb.dao.winners.impls.WinnersImplFake;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.CulturalBuilding;
 import edu.zhenia.labtwodb.model.TypeOfEvent;
@@ -21,6 +23,43 @@ import java.util.List;
 public class WinnersServiceImpl implements IWinnersService {
 
     @Autowired
+    WinnersImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public Winners save(Winners artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public Winners get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Winners> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public Winners edit(Winners group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public Winners delete(String id) {
+        Winners artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+    /*@Autowired
     WinnersRepository repository;
 
     @PostConstruct
@@ -57,7 +96,7 @@ public class WinnersServiceImpl implements IWinnersService {
         Winners artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<Winners> searchByArtist(String word) {
         List<Winners> winners = this.getAll();

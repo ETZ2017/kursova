@@ -3,9 +3,11 @@ package edu.zhenia.labtwodb.dao.artistAtEvent.impls;
 import edu.zhenia.labtwodb.dao.artistAtEvent.interfaces.IArtistAtEventDao;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.service.artistAtEvent.impls.ArtistAtEventServiceImpl;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ArtistAtEventImplFake implements IArtistAtEventDao {
     ArtistAtEventServiceImpl service;
     @Override

@@ -1,5 +1,7 @@
 package edu.zhenia.labtwodb.service.artistInGenre.impls;
 
+import edu.zhenia.labtwodb.dao.artistImpressario.impls.ArtistImpressarioImplFake;
+import edu.zhenia.labtwodb.dao.artistInGenre.impls.ArtistInGenreImplFake;
 import edu.zhenia.labtwodb.dao.repository.ArtistInGenreRepository;
 import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
 import edu.zhenia.labtwodb.dao.repository.GenreRepository;
@@ -22,6 +24,43 @@ import java.util.List;
 @Service
 public class ArtistInGenreServiceImpl implements IArtistInGenreService {
     @Autowired
+    ArtistInGenreImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public ArtistInGenre save(ArtistInGenre artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public ArtistInGenre get(String id) {
+        return dao.getAll().stream().filter(item -> item.getId().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<ArtistInGenre> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public ArtistInGenre edit(ArtistInGenre group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public ArtistInGenre delete(String id) {
+        ArtistInGenre artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+    /*@Autowired
     ArtistInGenreRepository repository;
 
     @Autowired
@@ -33,16 +72,16 @@ public class ArtistInGenreServiceImpl implements IArtistInGenreService {
 
     @PostConstruct
     void init(){
-        /*ArtistInGenre artistGenre = new ArtistInGenre();
+        *//*ArtistInGenre artistGenre = new ArtistInGenre();
         artistGenre.setArtist(repositoryArtist.findAll().get(0));
         artistGenre.setGenre(repositoryGenre.findAll().get(0));
 
-        repository.save(artistGenre);*/
-        /*List<ArtistAtEvent> list = new ArrayList<>(
+        repository.save(artistGenre);*//*
+        *//*List<ArtistAtEvent> list = new ArrayList<>(
                 Arrays.asList(
                         new ArtistAtEvent(repositoryArtist.findAll().get(0), null)
                 )
-        )*/
+        )*//*
         // repository.saveAll(list);
     }
 
@@ -74,7 +113,7 @@ public class ArtistInGenreServiceImpl implements IArtistInGenreService {
         ArtistInGenre artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<ArtistInGenre> searchByArtist(String word) {
         List<ArtistInGenre> artistInGenres = this.getAll();

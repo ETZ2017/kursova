@@ -1,5 +1,7 @@
 package edu.zhenia.labtwodb.service.artistImpressario.impls;
 
+import edu.zhenia.labtwodb.dao.artistAtEvent.impls.ArtistAtEventImplFake;
+import edu.zhenia.labtwodb.dao.artistImpressario.impls.ArtistImpressarioImplFake;
 import edu.zhenia.labtwodb.dao.repository.*;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.ArtistImpressario;
@@ -20,6 +22,43 @@ import java.util.List;
 @Service
 public class ArtistImpressarioServiceImpl implements IArtistImpressarioService {
     @Autowired
+    ArtistImpressarioImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public ArtistImpressario save(ArtistImpressario artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public ArtistImpressario get(String id) {
+        return dao.getAll().stream().filter(item -> item.getId().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<ArtistImpressario> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public ArtistImpressario edit(ArtistImpressario group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public ArtistImpressario delete(String id) {
+        ArtistImpressario artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+    /*@Autowired
     ArtistImpressarioRepository repository;
 
     @Autowired
@@ -31,11 +70,11 @@ public class ArtistImpressarioServiceImpl implements IArtistImpressarioService {
     @PostConstruct
     void init(){
 
-       /* ArtistImpressario artistImpressario = new ArtistImpressario();
+       *//* ArtistImpressario artistImpressario = new ArtistImpressario();
         artistImpressario.setArtist(repositoryArtist.findAll().get(0));
         artistImpressario.setImpressario(repositoryImpressario.findAll().get(0));
 
-        repository.save(artistImpressario);*/
+        repository.save(artistImpressario);*//*
     }
 
     @Override
@@ -66,7 +105,7 @@ public class ArtistImpressarioServiceImpl implements IArtistImpressarioService {
         ArtistImpressario artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<ArtistImpressario> searchByArtist(String word) {
         List<ArtistImpressario> artistImpressarios = this.getAll();

@@ -1,6 +1,8 @@
 package edu.zhenia.labtwodb.service.typeOfEvent.impls;
 
 import edu.zhenia.labtwodb.dao.repository.TypeOfEventRepository;
+import edu.zhenia.labtwodb.dao.typeOfBuilding.impls.TypeOfBuildingImplFake;
+import edu.zhenia.labtwodb.dao.typeOfEvent.impls.TypeOfEventImplFake;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.model.TypeOfEvent;
@@ -20,6 +22,43 @@ import java.util.List;
 public class TypeOfEventServiceImpl implements ITypeOfEventService {
 
     @Autowired
+    TypeOfEventImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public TypeOfEvent save(TypeOfEvent artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public TypeOfEvent get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<TypeOfEvent> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public TypeOfEvent edit(TypeOfEvent group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public TypeOfEvent delete(String id) {
+        TypeOfEvent artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+    /*@Autowired
     TypeOfEventRepository repository;
 
     @PostConstruct
@@ -56,7 +95,7 @@ public class TypeOfEventServiceImpl implements ITypeOfEventService {
         TypeOfEvent artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<TypeOfEvent> searchByType(String word) {
         List<TypeOfEvent> typeOfEvents = this.getAll();

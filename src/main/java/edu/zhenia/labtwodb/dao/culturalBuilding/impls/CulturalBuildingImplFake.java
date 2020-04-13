@@ -3,9 +3,11 @@ package edu.zhenia.labtwodb.dao.culturalBuilding.impls;
 import edu.zhenia.labtwodb.dao.culturalBuilding.interfaces.ICulturalBuildingDao;
 import edu.zhenia.labtwodb.model.CulturalBuilding;
 import edu.zhenia.labtwodb.service.culturalBuilding.impls.CulturalBuildingServiceImpl;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class CulturalBuildingImplFake implements ICulturalBuildingDao {
     CulturalBuildingServiceImpl service;
 

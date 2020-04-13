@@ -1,5 +1,7 @@
 package edu.zhenia.labtwodb.service.event.impls;
 
+import edu.zhenia.labtwodb.dao.culturalBuilding.impls.CulturalBuildingImplFake;
+import edu.zhenia.labtwodb.dao.event.impls.EventImplFake;
 import edu.zhenia.labtwodb.dao.repository.EventRepository;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.CulturalBuilding;
@@ -20,6 +22,42 @@ import java.util.List;
 public class EventServiceImpl implements IEventService {
 
     @Autowired
+    EventImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public Event save(Event artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public Event get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Event> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public Event edit(Event group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public Event delete(String id) {
+        Event artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+    /*@Autowired
     EventRepository repository;
 
     @PostConstruct
@@ -56,7 +94,7 @@ public class EventServiceImpl implements IEventService {
         Event artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<Event> searchByName(String word) {
         List<Event> events = this.getAll();

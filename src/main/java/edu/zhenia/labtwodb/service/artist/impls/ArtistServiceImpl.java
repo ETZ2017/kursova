@@ -1,5 +1,6 @@
 package edu.zhenia.labtwodb.service.artist.impls;
 
+import edu.zhenia.labtwodb.dao.artist.impls.DaoImplFake;
 import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
 import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.service.artist.interfaces.IArtistService;
@@ -17,6 +18,44 @@ import java.util.List;
 public class ArtistServiceImpl implements IArtistService {
 
     @Autowired
+    DaoImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public Artist save(Artist artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public Artist get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Artist> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public Artist edit(Artist group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public Artist delete(String id) {
+        Artist artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+
+   /* @Autowired
     ArtistRepository repository;
 
 
@@ -59,7 +98,7 @@ public class ArtistServiceImpl implements IArtistService {
         Artist artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<Artist> search(String word){
         List<Artist> artists = this.getAll();

@@ -1,6 +1,8 @@
 package edu.zhenia.labtwodb.service.specialFeatures.impls;
 
+import edu.zhenia.labtwodb.dao.places.impls.PlacesImplFake;
 import edu.zhenia.labtwodb.dao.repository.SpecialFeaturesRepository;
+import edu.zhenia.labtwodb.dao.specialFeatures.impls.SpecialFeaturesImplFake;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.Impressario;
 import edu.zhenia.labtwodb.model.Places;
@@ -20,6 +22,43 @@ import java.util.List;
 @Service
 public class SpecialFeaturesServiceImpl implements ISpecialFeaturesService {
     @Autowired
+    SpecialFeaturesImplFake dao;
+
+    @PostConstruct
+    void init(){
+
+        //repository.saveAll(list);
+    }
+
+    @Override
+    public SpecialFeatures save(SpecialFeatures artist) {
+        return dao.save(artist);
+    }
+
+    @Override
+    public SpecialFeatures get(String id) {
+        return dao.getAll().stream().filter(item -> item.getid().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<SpecialFeatures> getAll() {
+        return dao.getAll();
+    }
+
+    @Override
+    public SpecialFeatures edit(SpecialFeatures group) {
+        return dao.edit(group);
+    }
+
+    @Override
+    public SpecialFeatures delete(String id) {
+        SpecialFeatures artist = this.get(id);
+        dao.getAll().remove(artist);
+        return artist;
+    }
+
+   /* @Autowired
     SpecialFeaturesRepository repository;
 
     @PostConstruct
@@ -55,7 +94,7 @@ public class SpecialFeaturesServiceImpl implements ISpecialFeaturesService {
         SpecialFeatures artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
-    }
+    }*/
 
     public List<SpecialFeatures> searchByType(String word) {
         List<SpecialFeatures> specials = this.getAll();

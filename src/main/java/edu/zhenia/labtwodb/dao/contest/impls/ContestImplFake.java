@@ -3,9 +3,11 @@ package edu.zhenia.labtwodb.dao.contest.impls;
 import edu.zhenia.labtwodb.model.Contest;
 import edu.zhenia.labtwodb.service.contest.impls.ContestServiceImpl;
 import edu.zhenia.labtwodb.service.contest.interfaces.IContestService;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ContestImplFake implements IContestService {
     ContestServiceImpl service;
 

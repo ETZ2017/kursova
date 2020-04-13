@@ -3,9 +3,10 @@ package edu.zhenia.labtwodb.dao.typeOfBuilding.impls;
 import edu.zhenia.labtwodb.dao.typeOfBuilding.interfaces.ITypeOfBuildingDao;
 import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.service.typeOfBuilding.impls.TypeOfBuildingServiceImpl;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class TypeOfBuildingImplFake implements ITypeOfBuildingDao {
     TypeOfBuildingServiceImpl service;
     @Override

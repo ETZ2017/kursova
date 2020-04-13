@@ -3,9 +3,10 @@ package edu.zhenia.labtwodb.dao.places.impls;
 import edu.zhenia.labtwodb.dao.places.interfaces.IPlacesDao;
 import edu.zhenia.labtwodb.model.Places;
 import edu.zhenia.labtwodb.service.places.impls.PlacesServiceImpl;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class PlacesImplFake implements IPlacesDao {
     PlacesServiceImpl service;
     @Override

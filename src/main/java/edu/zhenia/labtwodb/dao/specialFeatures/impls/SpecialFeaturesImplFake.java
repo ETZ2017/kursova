@@ -3,9 +3,10 @@ package edu.zhenia.labtwodb.dao.specialFeatures.impls;
 import edu.zhenia.labtwodb.dao.specialFeatures.interfaces.ISpecialFeaturesDao;
 import edu.zhenia.labtwodb.model.SpecialFeatures;
 import edu.zhenia.labtwodb.service.specialFeatures.impls.SpecialFeaturesServiceImpl;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class SpecialFeaturesImplFake implements ISpecialFeaturesDao {
     SpecialFeaturesServiceImpl service;
 
