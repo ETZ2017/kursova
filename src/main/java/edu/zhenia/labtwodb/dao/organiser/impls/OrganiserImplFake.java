@@ -1,14 +1,18 @@
 package edu.zhenia.labtwodb.dao.organiser.impls;
 
 import edu.zhenia.labtwodb.dao.organiser.interfaces.IOrganiserDao;
+import edu.zhenia.labtwodb.dataSet.DataSet;
 import edu.zhenia.labtwodb.model.Organiser;
 import edu.zhenia.labtwodb.service.organiser.impls.OrganiserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
 public class OrganiserImplFake implements IOrganiserDao {
-    OrganiserServiceImpl service;
+    @Autowired
+    DataSet dataSet;
+
     @Override
     public Organiser save(Organiser Organiser) {
         return null;
@@ -21,7 +25,7 @@ public class OrganiserImplFake implements IOrganiserDao {
 
     @Override
     public List<Organiser> getAll() {
-        return service.getAll();
+        return dataSet.getOrganisers();
     }
 
     @Override

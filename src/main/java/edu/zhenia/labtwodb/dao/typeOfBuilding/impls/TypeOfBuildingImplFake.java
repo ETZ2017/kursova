@@ -1,14 +1,18 @@
 package edu.zhenia.labtwodb.dao.typeOfBuilding.impls;
 
 import edu.zhenia.labtwodb.dao.typeOfBuilding.interfaces.ITypeOfBuildingDao;
+import edu.zhenia.labtwodb.dataSet.DataSet;
 import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.service.typeOfBuilding.impls.TypeOfBuildingServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
 public class TypeOfBuildingImplFake implements ITypeOfBuildingDao {
-    TypeOfBuildingServiceImpl service;
+    @Autowired
+    DataSet dataSet;
+
     @Override
     public TypeOfBuilding save(TypeOfBuilding TypeOfBuilding) {
         return null;
@@ -21,7 +25,7 @@ public class TypeOfBuildingImplFake implements ITypeOfBuildingDao {
 
     @Override
     public List<TypeOfBuilding> getAll() {
-        return service.getAll();
+        return dataSet.getTypeOfBuildings();
     }
 
     @Override

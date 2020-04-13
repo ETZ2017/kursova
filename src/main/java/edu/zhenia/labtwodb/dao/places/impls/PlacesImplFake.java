@@ -1,14 +1,18 @@
 package edu.zhenia.labtwodb.dao.places.impls;
 
 import edu.zhenia.labtwodb.dao.places.interfaces.IPlacesDao;
+import edu.zhenia.labtwodb.dataSet.DataSet;
 import edu.zhenia.labtwodb.model.Places;
 import edu.zhenia.labtwodb.service.places.impls.PlacesServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
 public class PlacesImplFake implements IPlacesDao {
-    PlacesServiceImpl service;
+    @Autowired
+    DataSet dataSet;
+
     @Override
     public Places save(Places Places) {
         return null;
@@ -21,7 +25,7 @@ public class PlacesImplFake implements IPlacesDao {
 
     @Override
     public List<Places> getAll() {
-        return service.getAll();
+        return dataSet.getPlaces();
     }
 
     @Override

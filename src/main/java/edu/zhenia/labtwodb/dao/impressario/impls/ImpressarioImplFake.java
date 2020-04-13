@@ -1,14 +1,18 @@
 package edu.zhenia.labtwodb.dao.impressario.impls;
 
 import edu.zhenia.labtwodb.dao.impressario.interfaces.IImpressarioDao;
+import edu.zhenia.labtwodb.dataSet.DataSet;
 import edu.zhenia.labtwodb.model.Impressario;
 import edu.zhenia.labtwodb.service.impressario.impls.ImpressarioServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
 public class ImpressarioImplFake implements IImpressarioDao {
-    ImpressarioServiceImpl service;
+    @Autowired
+    DataSet dataSet;
+
     @Override
     public Impressario save(Impressario Impressario) {
         return null;
@@ -21,7 +25,7 @@ public class ImpressarioImplFake implements IImpressarioDao {
 
     @Override
     public List<Impressario> getAll() {
-        return service.getAll();
+        return dataSet.getImpressarios();
     }
 
     @Override

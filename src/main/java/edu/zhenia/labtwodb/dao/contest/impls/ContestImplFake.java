@@ -1,15 +1,18 @@
 package edu.zhenia.labtwodb.dao.contest.impls;
 
+import edu.zhenia.labtwodb.dataSet.DataSet;
 import edu.zhenia.labtwodb.model.Contest;
 import edu.zhenia.labtwodb.service.contest.impls.ContestServiceImpl;
 import edu.zhenia.labtwodb.service.contest.interfaces.IContestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class ContestImplFake implements IContestService {
-    ContestServiceImpl service;
+    @Autowired
+    DataSet dataSet;
 
     @Override
     public Contest save(Contest Contest) {
@@ -23,7 +26,7 @@ public class ContestImplFake implements IContestService {
 
     @Override
     public List<Contest> getAll() {
-        return service.getAll();
+        return dataSet.getContests();
     }
 
     @Override

@@ -1,15 +1,18 @@
 package edu.zhenia.labtwodb.dao.artist.impls;
 
 import edu.zhenia.labtwodb.dao.artist.interfaces.IArtistDao;
+import edu.zhenia.labtwodb.dataSet.DataSet;
 import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class DaoImplFake implements IArtistDao {
-    ArtistServiceImpl service;
+    @Autowired
+    DataSet dataSet;
 
     @Override
     public Artist save(Artist artist) {
@@ -23,7 +26,7 @@ public class DaoImplFake implements IArtistDao {
 
     @Override
     public List<Artist> getAll() {
-        return service.getAll();
+        return dataSet.getArtists();
     }
 
     @Override

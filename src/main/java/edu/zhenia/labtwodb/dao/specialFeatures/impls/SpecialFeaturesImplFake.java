@@ -1,14 +1,17 @@
 package edu.zhenia.labtwodb.dao.specialFeatures.impls;
 
 import edu.zhenia.labtwodb.dao.specialFeatures.interfaces.ISpecialFeaturesDao;
+import edu.zhenia.labtwodb.dataSet.DataSet;
 import edu.zhenia.labtwodb.model.SpecialFeatures;
 import edu.zhenia.labtwodb.service.specialFeatures.impls.SpecialFeaturesServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
 public class SpecialFeaturesImplFake implements ISpecialFeaturesDao {
-    SpecialFeaturesServiceImpl service;
+    @Autowired
+    DataSet dataSet;
 
     @Override
     public SpecialFeatures save(SpecialFeatures SpecialFeatures) {
@@ -22,7 +25,7 @@ public class SpecialFeaturesImplFake implements ISpecialFeaturesDao {
 
     @Override
     public List<SpecialFeatures> getAll() {
-        return service.getAll();
+        return dataSet.getSpecialFeatures();
     }
 
     @Override

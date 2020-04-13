@@ -1,14 +1,18 @@
 package edu.zhenia.labtwodb.dao.winners.impls;
 
 import edu.zhenia.labtwodb.dao.winners.interfaces.IWinnersDao;
+import edu.zhenia.labtwodb.dataSet.DataSet;
 import edu.zhenia.labtwodb.model.Winners;
 import edu.zhenia.labtwodb.service.winners.impls.WinnersServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
 public class WinnersImplFake implements IWinnersDao {
-    WinnersServiceImpl service;
+    @Autowired
+    DataSet dataSet;
+
     @Override
     public Winners save(Winners Winners) {
         return null;
@@ -21,7 +25,7 @@ public class WinnersImplFake implements IWinnersDao {
 
     @Override
     public List<Winners> getAll() {
-        return service.getAll();
+        return dataSet.getWinners();
     }
 
     @Override
