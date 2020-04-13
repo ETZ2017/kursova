@@ -1,15 +1,22 @@
 package edu.zhenia.labtwodb.controllers.web;
 
-import edu.zhenia.labtwodb.model.Artist;
+import edu.zhenia.labtwodb.forms.ArtistForm;
+import edu.zhenia.labtwodb.forms.ContestForm;
+import edu.zhenia.labtwodb.forms.OrganiserForm;
+import edu.zhenia.labtwodb.forms.SearchForm;
+import edu.zhenia.labtwodb.model.*;
 import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
+import edu.zhenia.labtwodb.service.genre.impls.GenreServiceImpl;
+import edu.zhenia.labtwodb.service.impressario.impls.ImpressarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/web/artist")
@@ -17,17 +24,104 @@ public class ArtistWEBController {
     @Autowired
     ArtistServiceImpl service;
 
-    @RequestMapping("/list")
+    @Autowired
+    GenreServiceImpl genreService;
+
+    @Autowired
+    ImpressarioServiceImpl impressarioService;
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     String getall(Model model){
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("artists", service.getAll());
         return "artistList";
     }
+
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public String search(Model model,
+                                @ModelAttribute("searchForm") SearchForm searchForm){
+       String word = searchForm.getSearchField();
+       List <Artist>  list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("artists", list);
+        return "artistList";
+    }
+
+    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    public String showSorted(Model model) {
+        List<Artist> artists = service.getAll();
+        List<Artist> sorted = service.sortByName(artists);
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("artists", sorted);
+        return "artistList";
+    }
+
 
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("artists", service.getAll());
-        return "artistList";
+        return "redirect:/web/artist/list";
+    }
+
+    @RequestMapping( value = "/create", method = RequestMethod.GET)
+    String create(Model model){
+        ArtistForm artistForm = new ArtistForm();
+        Map<String, String> mavs =  genreService.getAll().stream().collect(Collectors.toMap(
+                Genre::getid, Genre::getGenre
+        ));
+        /*Map<String, String> impressario =  impressarioService.getAll().stream().collect(Collectors.toMap(
+                Impressario::getid, Impressario::getFirstName
+        ));*/
+        model.addAttribute("artistForm", artistForm);
+        model.addAttribute("mavs", mavs);
+       // model.addAttribute("impressario", impressario);
+        return "artistAdd";
+    }
+
+    @RequestMapping( value = "/create", method = RequestMethod.POST)
+    String create(Model model, @ModelAttribute("artistForm") ArtistForm artistForm) {
+        Artist group = new Artist();
+        Genre genre = genreService.get(artistForm.getGenre());
+        //Impressario impressario = impressarioService.get(artistForm.getImpressario());
+        group.setFirstName(artistForm.getFirstname());
+        group.setGenre(genre);
+        //group.setImpressario(impressario);
+        group.setDescription(artistForm.getDescription());
+        service.save(group);
+        model.addAttribute("artists", service.getAll());
+        return "redirect:/web/artist/list";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    String edit(Model model, @PathVariable("id") String id) {
+        Artist group = service.get(id);
+        ArtistForm groupForm = new ArtistForm();
+        Map<String, String> mavs = genreService.getAll().stream()
+                .collect(Collectors.toMap(Genre::getid, Genre::getGenre));
+
+        groupForm.setId(group.getid());
+        groupForm.setFirstname(group.getFirstName());
+        groupForm.setGenre(group.getGenre().getGenre());
+        groupForm.setDescription(group.getDescription());
+        model.addAttribute("artistForm", groupForm);
+        model.addAttribute("mavs", mavs);
+        return "artistEdit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("artistForm") ArtistForm artistForm) {
+        Artist group = new Artist();
+        group.setid(artistForm.getId());
+        Genre genre = genreService.get(artistForm.getGenre());
+        group.setGenre(genre);
+        group.setFirstName(artistForm.getFirstname());
+        group.setDescription(artistForm.getDescription());
+        service.edit(group);
+        model.addAttribute("artists", service.getAll());
+        return "redirect:/web/artist/list";
     }
 }

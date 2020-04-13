@@ -28,7 +28,7 @@ public class OrganiserAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     Organiser edit(@RequestBody Organiser organiser){
-        return service.save(organiser);
+        return service.edit(organiser);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

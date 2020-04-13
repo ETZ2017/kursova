@@ -36,7 +36,7 @@ public class ArtistAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     Artist edit(@RequestBody Artist artist){
-        return service.save(artist);
+        return service.edit(artist);
     }
 
 }

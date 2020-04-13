@@ -11,35 +11,35 @@ public class Organiser {
     @Id
     private String  id;
     private String firstName;
-    private String lastName;
-    private String patronymic;
     private String description;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
 
-
-    public Organiser() {
-    }
-
-    public Organiser(String id, String firstName, String lastName, String patronymic, String description,
-                     LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.id = id;
+    public Organiser(String firstName, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymic = patronymic;
         this.description = description;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
     }
 
-    public Organiser(String firstName, String lastName, String patronymic) {
-        //this.id = createID();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymic = patronymic;
+    public Organiser() {
     }
 
-//    public long getid() {
+    public Organiser(String id, String firstName, String description,
+                     LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
+        this.firstName = firstName;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+    }
+
+    public Organiser(String firstName, String description) {
+        this.firstName = firstName;
+        this.description = description;
+    }
+
+    //    public long getid() {
 //        return id;
 //    }
 
@@ -84,21 +84,6 @@ public class Organiser {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
 
     @Override
     public boolean equals(Object o) {

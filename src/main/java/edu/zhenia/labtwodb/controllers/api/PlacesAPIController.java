@@ -28,7 +28,7 @@ public class PlacesAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     Places edit(@RequestBody Places places){
-        return service.save(places);
+        return service.edit(places);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

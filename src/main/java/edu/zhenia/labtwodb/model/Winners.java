@@ -10,9 +10,9 @@ import java.util.Objects;
 public class Winners {
     @Id
     private String id;
-    private String place;
-    private String contest;
-    private String artist;
+    private Places place;
+    private Contest contest;
+    private Artist artist;
     private String description;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
@@ -21,8 +21,7 @@ public class Winners {
     public Winners() {
     }
 
-    public Winners(String id, String place, String contest, String artist, String description, LocalDateTime dateCreated,
-                   LocalDateTime dateModified) {
+    public Winners(String id, Places place, Contest contest, Artist artist, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.place = place;
         this.contest = contest;
@@ -32,18 +31,13 @@ public class Winners {
         this.dateModified = dateModified;
     }
 
-    public Winners(String place, String contest, String artist) {
+    public Winners(Places place, Contest contest, Artist artist, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.place = place;
         this.contest = contest;
         this.artist = artist;
-    }
-
-    public String getContest() {
-        return contest;
-    }
-
-    public void setContest(String contest) {
-        this.contest = contest;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
     }
 
     public String getid() {
@@ -78,19 +72,27 @@ public class Winners {
         this.dateModified = dateModified;
     }
 
-    public String getPlace() {
+    public Places getPlace() {
         return place;
     }
 
-    public void setPlace(String place) {
+    public void setPlace(Places place) {
         this.place = place;
     }
 
-    public String getArtist() {
+    public Contest getContest() {
+        return contest;
+    }
+
+    public void setContest(Contest contest) {
+        this.contest = contest;
+    }
+
+    public Artist getArtist() {
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setArtist(Artist artist) {
         this.artist = artist;
     }
 

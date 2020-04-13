@@ -25,7 +25,7 @@ public class TypeOfBuildingAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     TypeOfBuilding edit(@RequestBody TypeOfBuilding typeOfBuilding){
-        return service.save(typeOfBuilding);
+        return service.edit(typeOfBuilding);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

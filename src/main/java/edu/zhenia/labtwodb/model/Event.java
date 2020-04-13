@@ -13,11 +13,11 @@ public class Event {
     @Id
     private String id;
     private String name;
-    private String building;
-    private String typeOfEvent;
-    private String organizer;
+    private CulturalBuilding building;
+    private TypeOfEvent typeOfEvent;
+    private Organiser organizer;
     //private List artist;
-    private String contest;
+    private Contest contest;
     private LocalDateTime data;
     private String description;
     private LocalDateTime dateCreated;
@@ -27,14 +27,11 @@ public class Event {
     public Event() {
     }
 
-    public Event(String id, String name, String building, String typeOfEvent, String organizer, String contest,
-                 LocalDateTime data,  String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+    public Event(String id, String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Contest contest, LocalDateTime data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.name = name;
         this.building = building;
         this.typeOfEvent = typeOfEvent;
-        this.organizer = organizer;
-        //this.artist = artist;
         this.contest = contest;
         this.data = data;
         this.description = description;
@@ -42,18 +39,30 @@ public class Event {
         this.dateModified = dateModified;
     }
 
-    public Event(String name, String building, String typeOfEvent, String organizer, String contest,
-                 LocalDateTime data) {
-//        this.id = id;
+    public Event(String id, String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Organiser organizer, Contest contest, LocalDateTime data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.name = name;
         this.building = building;
         this.typeOfEvent = typeOfEvent;
         this.organizer = organizer;
-        //this.artist = artist;
         this.contest = contest;
         this.data = data;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
     }
 
+    public Event(String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Organiser organizer, Contest contest, LocalDateTime data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.name = name;
+        this.building = building;
+        this.typeOfEvent = typeOfEvent;
+        this.organizer = organizer;
+        this.contest = contest;
+        this.data = data;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+    }
 
     public String getid() {
         return id;
@@ -95,43 +104,35 @@ public class Event {
         this.name = name;
     }
 
-    public String getBuilding() {
+    public CulturalBuilding getBuilding() {
         return building;
     }
 
-    public void setBuilding(String building) {
+    public void setBuilding(CulturalBuilding building) {
         this.building = building;
     }
 
-    public String getTypeOfEvent() {
+    public TypeOfEvent getTypeOfEvent() {
         return typeOfEvent;
     }
 
-    public void setTypeOfEvent(String typeOfEvent) {
+    public void setTypeOfEvent(TypeOfEvent typeOfEvent) {
         this.typeOfEvent = typeOfEvent;
     }
 
-    public String getOrganizer() {
+    public Organiser getOrganizer() {
         return organizer;
     }
 
-    public void setOrganizer(String organizer) {
+    public void setOrganizer(Organiser organizer) {
         this.organizer = organizer;
     }
 
-    /*public List getArtist() {
-        return artist;
-    }
-
-    public void setArtist(List artist) {
-        this.artist = artist;
-    }*/
-
-    public String getContest() {
+    public Contest getContest() {
         return contest;
     }
 
-    public void setContest(String contest) {
+    public void setContest(Contest contest) {
         this.contest = contest;
     }
 

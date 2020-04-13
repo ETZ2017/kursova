@@ -28,7 +28,7 @@ public class GenreAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     Genre edit(@RequestBody Genre genre){
-        return service.save(genre);
+        return service.edit(genre);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

@@ -11,31 +11,27 @@ public class CulturalBuilding {
     @Id
     private String id;
     private String name;
-    private String type;
-    private String specials;
+    private TypeOfBuilding type;
+    private SpecialFeatures specials;
+    private String value;
     private String description;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
 
-    public CulturalBuilding(String name, String type, String specials, String description) {
+    public CulturalBuilding(String id, String name, TypeOfBuilding type, SpecialFeatures specials, String value, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.specials = specials;
+        this.value = value;
         this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
     }
 
     public CulturalBuilding() {
     }
 
-    public CulturalBuilding(String id, String name, String type, String specials, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.specials = specials;
-        this.description = description;
-        this.dateCreated = dateCreated;
-        this.dateModified = dateModified;
-    }
 
     public String getid() {
         return id;
@@ -53,19 +49,19 @@ public class CulturalBuilding {
         this.name = name;
     }
 
-    public String getType() {
+    public TypeOfBuilding getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypeOfBuilding type) {
         this.type = type;
     }
 
-    public String getSpecials() {
+    public SpecialFeatures getSpecials() {
         return specials;
     }
 
-    public void setSpecials(String specials) {
+    public void setSpecials(SpecialFeatures specials) {
         this.specials = specials;
     }
 
@@ -83,6 +79,14 @@ public class CulturalBuilding {
 
     public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public LocalDateTime getDateModified() {
@@ -104,5 +108,19 @@ public class CulturalBuilding {
     @Override
     public int hashCode() {
         return Objects.hash(getid());
+    }
+
+    @Override
+    public String toString() {
+        return "CulturalBuilding{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", specials=" + specials +
+                ", value='" + value + '\'' +
+                ", description='" + description + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", dateModified=" + dateModified +
+                '}';
     }
 }

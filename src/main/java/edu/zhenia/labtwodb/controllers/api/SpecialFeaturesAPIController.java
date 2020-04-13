@@ -28,7 +28,7 @@ public class SpecialFeaturesAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     SpecialFeatures edit(@RequestBody SpecialFeatures specialFeatures){
-        return service.save(specialFeatures);
+        return service.edit(specialFeatures);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

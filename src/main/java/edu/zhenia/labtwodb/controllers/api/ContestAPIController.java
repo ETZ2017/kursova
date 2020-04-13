@@ -27,7 +27,7 @@ public class ContestAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     Contest edit(@RequestBody Contest contest){
-        return service.save(contest);
+        return service.edit(contest);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

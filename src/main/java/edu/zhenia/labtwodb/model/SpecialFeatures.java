@@ -11,7 +11,7 @@ public class SpecialFeatures {
     @Id
     private String id;
     private String type;
-    private String value;
+    //private String value;
     private String description;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
@@ -20,19 +20,17 @@ public class SpecialFeatures {
     public SpecialFeatures() {
     }
 
-    public SpecialFeatures(String id, String type, String value, String description, LocalDateTime dateCreated,
-                           LocalDateTime dateModified) {
+    public SpecialFeatures(String id, String type, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.type = type;
-        this.value = value;
         this.description = description;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
     }
 
-    public SpecialFeatures(String type, String value) {
+    public SpecialFeatures(String type, String description) {
         this.type = type;
-        this.value = value;
+        this.description = description;
     }
 
     public String getid() {
@@ -75,13 +73,13 @@ public class SpecialFeatures {
         this.type = type;
     }
 
-    public String getValue() {
+    /*public String getValue() {
         return value;
     }
 
     public void setValue(String value) {
         this.value = value;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
@@ -94,5 +92,16 @@ public class SpecialFeatures {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "SpecialFeatures{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", dateModified=" + dateModified +
+                '}';
     }
 }

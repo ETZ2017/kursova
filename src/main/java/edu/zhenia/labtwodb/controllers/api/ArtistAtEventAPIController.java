@@ -29,7 +29,7 @@ public class ArtistAtEventAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     ArtistAtEvent edit(@RequestBody ArtistAtEvent artist){
-        return service.save(artist);
+        return service.edit(artist);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

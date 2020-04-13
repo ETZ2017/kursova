@@ -11,10 +11,8 @@ public class Impressario {
     @Id
     private String id;
     private String firstName;
-    private String lastName;
-    private String patronymic;
-    private String genre;
-    private String artist;
+    private Genre genre;
+//    private Artist artist;
     private String description;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
@@ -29,38 +27,28 @@ public class Impressario {
     public Impressario() {
     }
 
-    public Impressario(String id, String firstName, String lastName, String patronymic, String genre, String artist, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+    public Impressario(String id, String firstName, Genre genre, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymic = patronymic;
         this.genre = genre;
-        this.artist = artist;
         this.description = description;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
     }
 
-    public Impressario(String firstName, String lastName, String patronymic, String genre, String artist) {
+    public Impressario(String firstName, Genre genre, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymic = patronymic;
         this.genre = genre;
-        this.artist = artist;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
     }
 
-    public String getArtist() {
-        return artist;
+    public Impressario(String firstName, Genre genre,  String description) {
+        this.firstName = firstName;
+        this.genre = genre;
+        this.description = description;
     }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    //    public String getid() {
-//        return id;
-//    }
-
 
     public String getid() {
         return id;
@@ -102,27 +90,11 @@ public class Impressario {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
@@ -137,5 +109,17 @@ public class Impressario {
     @Override
     public int hashCode() {
         return Objects.hash(getid());
+    }
+
+    @Override
+    public String toString() {
+        return "Impressario{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", genre=" + genre +
+                ", description='" + description + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", dateModified=" + dateModified +
+                '}';
     }
 }

@@ -28,7 +28,7 @@ public class ImpressarioAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     Impressario edit(@RequestBody Impressario impressario){
-        return service.save(impressario);
+        return service.edit(impressario);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

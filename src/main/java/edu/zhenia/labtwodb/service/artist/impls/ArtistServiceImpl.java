@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -16,10 +19,12 @@ public class ArtistServiceImpl implements IArtistService {
     @Autowired
     ArtistRepository repository;
 
+
+
     @PostConstruct
     void init(){
 
-      // repository.saveAll(list);
+        // repository.saveAll(list);
     }
 
     @Override
@@ -36,6 +41,10 @@ public class ArtistServiceImpl implements IArtistService {
 
     @Override
     public List<Artist> getAll() {
+
+
+        System.out.println(repository.findAll());
+
         return repository.findAll();
     }
 
@@ -50,5 +59,34 @@ public class ArtistServiceImpl implements IArtistService {
         Artist artist = repository.findById(id).orElse(null);
         repository.deleteById(id);
         return artist;
+    }
+
+    public List<Artist> search(String word){
+        List<Artist> artists = this.getAll();
+        List<Artist> found = new ArrayList<>();
+
+        String temp = word.toLowerCase();
+
+        for(Artist artist : artists) {
+            if(artist.getFirstName().contains(word) ||
+                    artist.getFirstName().toLowerCase().contains(temp)){
+                found.add(artist);
+            }
+        }
+
+        return found;
+    }
+
+    public List<Artist> sortByName(List<Artist> artists){
+
+        Collections.sort(artists, new ArtistNameComparator());
+
+        return artists;
+    }
+
+    private class ArtistNameComparator implements Comparator<Artist> {
+        public int compare(Artist p1, Artist p2) {
+            return p1.getFirstName().compareTo(p2.getFirstName());
+        }
     }
 }

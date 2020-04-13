@@ -11,10 +11,7 @@ public class Artist {
     @Id
     private String id;
     private String firstName;
-    private String lastName;
-    private String patronymic;
-    private String genre;
-    private String impressario;
+    private Genre genre;
     private String description;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
@@ -22,25 +19,21 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String id, String firstName, String lastName, String patronymic, String genre, String impressario, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+    public Artist(String id, String firstName, Genre genre, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymic = patronymic;
         this.genre = genre;
-        this.impressario = impressario;
         this.description = description;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
     }
 
-    public Artist(String firstName, String lastName, String patronymic, String genre, String impressario) {
-       // this.id = createID();
+    public Artist(String firstName, Genre genre, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymic = patronymic;
         this.genre = genre;
-        this.impressario = impressario;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
     }
 
     public String getid() {
@@ -83,36 +76,12 @@ public class Artist {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
-    }
-
-    public String getImpressario() {
-        return impressario;
-    }
-
-    public void setImpressario(String impressario) {
-        this.impressario = impressario;
     }
 
     @Override
@@ -126,5 +95,17 @@ public class Artist {
     @Override
     public int hashCode() {
         return Objects.hash(getid());
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", genre=" + genre +
+                ", description='" + description + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", dateModified=" + dateModified +
+                '}';
     }
 }

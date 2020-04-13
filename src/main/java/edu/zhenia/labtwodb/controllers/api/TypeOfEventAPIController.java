@@ -28,7 +28,7 @@ public class TypeOfEventAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     TypeOfEvent edit(@RequestBody TypeOfEvent typeOfEvent){
-        return service.save(typeOfEvent);
+        return service.edit(typeOfEvent);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

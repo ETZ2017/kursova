@@ -1,24 +1,48 @@
 package edu.zhenia.labtwodb.service.artistAtEvent.impls;
 
 import edu.zhenia.labtwodb.dao.repository.ArtistAtEventRepository;
+import edu.zhenia.labtwodb.dao.repository.ArtistRepository;
+import edu.zhenia.labtwodb.dao.repository.ContestRepository;
+import edu.zhenia.labtwodb.dao.repository.EventRepository;
+import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.model.ArtistAtEvent;
 import edu.zhenia.labtwodb.model.ArtistInGenre;
+import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
 import edu.zhenia.labtwodb.service.artistAtEvent.interfaces.IArtistAtEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ArtistAtEventServiceImpl implements IArtistAtEventService {
     @Autowired
     ArtistAtEventRepository repository;
 
+    @Autowired
+    ArtistRepository repositoryArtist;
+
+    @Autowired
+    EventRepository repositoryEvent;
+
+    @Autowired
+    ContestRepository repositoryContest;
+
     @PostConstruct
     void init(){
+        /*ArtistAtEvent artistEvent = new ArtistAtEvent();
+        artistEvent.setArtist(repositoryArtist.findAll().get(0));
+        artistEvent.setEvent(repositoryEvent.findAll().get(0));
+        artistEvent.setContest(repositoryContest.findAll().get(0));
 
+        repository.save(artistEvent);*/
+        /*List<ArtistAtEvent> list = new ArrayList<>(
+                Arrays.asList(
+                        new ArtistAtEvent(repositoryArtist.findAll().get(0), null)
+                )
+        )*/
         // repository.saveAll(list);
     }
 
@@ -52,4 +76,65 @@ public class ArtistAtEventServiceImpl implements IArtistAtEventService {
         repository.deleteById(id);
         return artist;
     }
+
+    public List<ArtistAtEvent> searchByArtist(String word) {
+        List<ArtistAtEvent> artistsAtEvents = this.getAll();
+        List<ArtistAtEvent> found = new ArrayList<>();
+
+        String temp = word.toLowerCase();
+
+        for (ArtistAtEvent artistAtEvent : artistsAtEvents) {
+            if (artistAtEvent.getArtist().getFirstName().toLowerCase().contains(temp)||
+                    artistAtEvent.getArtist().getFirstName().contains(word)) {
+                found.add(artistAtEvent);
+            }
+        }
+
+        return found;
+    }
+
+    public List<ArtistAtEvent> searchByEvent(String word) {
+        List<ArtistAtEvent> artistsAtEvents = this.getAll();
+        List<ArtistAtEvent> found = new ArrayList<>();
+
+        String temp = word.toLowerCase();
+
+        for (ArtistAtEvent artistAtEvent : artistsAtEvents) {
+            if (artistAtEvent.getEvent().getName().toLowerCase().contains(temp)||
+                    artistAtEvent.getEvent().getName().contains(word)) {
+                found.add(artistAtEvent);
+            }
+        }
+
+        return found;
+    }
+
+    public List<ArtistAtEvent> sortByName(List<ArtistAtEvent> artists){
+
+        Collections.sort(artists, new ArtistAtEventServiceImpl.ArtistAtEventNameComparator());
+
+        return artists;
+    }
+
+    private class ArtistAtEventNameComparator implements Comparator<ArtistAtEvent> {
+        public int compare(ArtistAtEvent p1, ArtistAtEvent p2) {
+            return p1.getArtist().getFirstName().compareTo(p2.getArtist().getFirstName());
+        }
+    }
+
+   /* public List<ArtistAtEvent> searchByContest(String word) {
+        List<ArtistAtEvent> artistsAtEvents = this.getAll();
+        List<ArtistAtEvent> found = new ArrayList<>();
+
+        String temp = word.toLowerCase();
+
+        for (ArtistAtEvent artistAtEvent : artistsAtEvents) {
+            if (artistAtEvent.getContest().getName().toLowerCase().contains(temp)||
+                    artistAtEvent.getContest().getName().contains(word)) {
+                found.add(artistAtEvent);
+            }
+        }
+
+        return found;
+    }*/
 }

@@ -27,7 +27,7 @@ public class CulturalBuildingAPIController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     CulturalBuilding edit(@RequestBody CulturalBuilding culturalBuilding){
-        return service.save(culturalBuilding);
+        return service.edit(culturalBuilding);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

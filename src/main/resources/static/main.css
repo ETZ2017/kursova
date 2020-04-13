@@ -1,0 +1,10 @@
+html {
+    background-image:url("AxonizeBlog_SinglePost_815x600_FacilityintoSmartBuilding.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+a {
+    color: #00a9de;
+}
