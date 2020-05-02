@@ -11,6 +11,7 @@ import edu.zhenia.labtwodb.service.event.impls.EventServiceImpl;
 import edu.zhenia.labtwodb.service.genre.impls.GenreServiceImpl;
 import edu.zhenia.labtwodb.service.impressario.impls.ImpressarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -61,12 +63,13 @@ public class ArtistAtEventWEBController {
             } else {
                 list = service.searchByArtist(word);
             };
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("artistAtEvents", list);
         return "artistAtEventList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<ArtistAtEvent> artists = service.getAll();
         List<ArtistAtEvent> sorted = service.sortByName(artists);
@@ -76,6 +79,7 @@ public class ArtistAtEventWEBController {
         return "artistAtEventList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -84,6 +88,7 @@ public class ArtistAtEventWEBController {
         return "artistAtEventList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         ArtistAtEventForm artistAtEventForm = new ArtistAtEventForm();
@@ -103,20 +108,22 @@ public class ArtistAtEventWEBController {
         return "artistAtEventAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("artistAtEventForm") ArtistAtEventForm artistAtEventForm) {
         ArtistAtEvent group = new ArtistAtEvent();
         Event event = eventService.get(artistAtEventForm.getEvent());
-        Contest contest = contestService.get(artistAtEventForm.getContest());
+        //Contest contest = contestService.get(artistAtEventForm.getContest());
         Artist artist = artistService.get(artistAtEventForm.getArtist());
         group.setArtist(artist);
         group.setEvent(event);
-        group.setContest(contest);
+        //group.setContest(contest);
         service.save(group);
         model.addAttribute("artistAtEvents", service.getAll());
         return "redirect:/web/artistatevent/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         ArtistAtEvent group = service.get(id);
@@ -130,9 +137,11 @@ public class ArtistAtEventWEBController {
         Map<String, String> contest =  contestService.getAll().stream().collect(Collectors.toMap(
                 Contest::getid, Contest::getName
         ));
+//        group.setDateCreated(group.getDateCreated());
+//        group.setDateModified(LocalDateTime.now());
         groupForm.setArtist(group.getArtist().getFirstName());
         groupForm.setEvent(group.getEvent().getName());
-        groupForm.setContest(group.getContest().getName());
+        //groupForm.setContest(group.getContest().getName());
         model.addAttribute("mavs", mavs);
         model.addAttribute("event", event);
         model.addAttribute("contest", contest);
@@ -140,6 +149,7 @@ public class ArtistAtEventWEBController {
         return "artistAtEventEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("artistAtEventForm") ArtistAtEventForm artistAtEventForm) {
         ArtistAtEvent group = new ArtistAtEvent();
@@ -147,7 +157,7 @@ public class ArtistAtEventWEBController {
         Contest contest = contestService.get(artistAtEventForm.getContest());
         Artist artist = artistService.get(artistAtEventForm.getArtist());
         group.setArtist(artist);
-        group.setContest(contest);
+        //group.setContest(contest);
         group.setEvent(event);
         service.edit(group);
         model.addAttribute("artistAtEvents", service.getAll());

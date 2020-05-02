@@ -8,31 +8,21 @@ public class EventForm {
     private String typeOfEvent;
     private String organiser;
     private String contest;
-    private LocalDateTime date;
+    private String day;
+    private String month;
+    private String year;
     private String description;
 
-    public EventForm(String name, LocalDateTime date, String description) {
-        this.name = name;
-        this.date = date;
-        this.description = description;
-    }
-
-    public EventForm(String name, String building, String typeOfEvent, String organiser, String contest, LocalDateTime date, String description) {
+    public EventForm(String name, String building, String typeOfEvent, String organiser,
+                     String contest, String day, String month, String year, String description) {
         this.name = name;
         this.building = building;
         this.typeOfEvent = typeOfEvent;
         this.organiser = organiser;
         this.contest = contest;
-        this.date = date;
-        this.description = description;
-    }
-
-    public EventForm(String name, String building, String typeOfEvent, String contest, LocalDateTime date, String description) {
-        this.name = name;
-        this.building = building;
-        this.typeOfEvent = typeOfEvent;
-        this.contest = contest;
-        this.date = date;
+        this.day = day;
+        this.month = month;
+        this.year = year;
         this.description = description;
     }
 
@@ -79,12 +69,28 @@ public class EventForm {
         this.contest = contest;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public String getDay() {
+        return day;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String getDescription() {
@@ -99,7 +105,13 @@ public class EventForm {
     public String toString() {
         return "EventForm{" +
                 "name='" + name + '\'' +
-                ", date=" + date +
+                ", building='" + building + '\'' +
+                ", typeOfEvent='" + typeOfEvent + '\'' +
+                ", organiser='" + organiser + '\'' +
+                ", contest='" + contest + '\'' +
+                ", day='" + day + '\'' +
+                ", month='" + month + '\'' +
+                ", year='" + year + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

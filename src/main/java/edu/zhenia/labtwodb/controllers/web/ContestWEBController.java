@@ -9,6 +9,7 @@ import edu.zhenia.labtwodb.model.Contest;
 import edu.zhenia.labtwodb.model.Genre;
 import edu.zhenia.labtwodb.service.contest.impls.ContestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +35,13 @@ public class ContestWEBController {
                          @ModelAttribute("searchForm") SearchForm searchForm){
         String word = searchForm.getSearchField();
         List <Contest>  list = service.search(word);
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("contests", list);
         return "contestList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<Contest> contests = service.getAll();
         List<Contest> sorted = service.sortByName(contests);
@@ -49,6 +51,7 @@ public class ContestWEBController {
         return "contestList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -57,6 +60,7 @@ public class ContestWEBController {
         return "redirect:/web/contest/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         ContestForm contestForm = new ContestForm();
@@ -64,6 +68,7 @@ public class ContestWEBController {
         return "contestAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("contestForm") ContestForm contestForm) {
         Contest group = new Contest();
@@ -74,6 +79,7 @@ public class ContestWEBController {
         return "redirect:/web/contest/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         Contest group = service.get(id);
@@ -84,6 +90,7 @@ public class ContestWEBController {
         return "contestEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("contestForm") ContestForm contestForm) {
         Contest group = new Contest();

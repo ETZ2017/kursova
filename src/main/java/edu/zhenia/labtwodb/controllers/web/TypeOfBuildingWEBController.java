@@ -7,6 +7,7 @@ import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.model.Winners;
 import edu.zhenia.labtwodb.service.typeOfBuilding.impls.TypeOfBuildingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +33,13 @@ public class TypeOfBuildingWEBController {
                          @ModelAttribute("searchForm") SearchForm searchForm){
         String word = searchForm.getSearchField();
         List <TypeOfBuilding>  list = service.searchByType(word);
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("typeOfBuildings", list);
         return "typeOfBuildingList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<TypeOfBuilding> typeOfBuildings = service.getAll();
         List<TypeOfBuilding> sorted = service.sortByName(typeOfBuildings);
@@ -47,6 +49,7 @@ public class TypeOfBuildingWEBController {
         return "typeOfBuildingList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -55,6 +58,7 @@ public class TypeOfBuildingWEBController {
         return "redirect:/web/typeofbuilding/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         TypeOfBuildingForm typeOfBuildingForm = new TypeOfBuildingForm();
@@ -62,6 +66,7 @@ public class TypeOfBuildingWEBController {
         return "typeOfBuildingAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("typeOfBuildingForm") TypeOfBuildingForm typeOfBuildingForm) {
         TypeOfBuilding group = new TypeOfBuilding();
@@ -72,6 +77,7 @@ public class TypeOfBuildingWEBController {
         return "redirect:/web/typeofbuilding/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         TypeOfBuilding group = service.get(id);
@@ -82,6 +88,7 @@ public class TypeOfBuildingWEBController {
         return "typeOfBuildingEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("typeOfBuildingForm") TypeOfBuilding typeOfBuilding) {
         TypeOfBuilding group = new TypeOfBuilding();

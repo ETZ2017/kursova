@@ -10,6 +10,7 @@ import edu.zhenia.labtwodb.model.Organiser;
 import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.service.organiser.impls.OrganiserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +36,13 @@ public class OrganiserWEBController {
                          @ModelAttribute("searchForm") SearchForm searchForm){
         String word = searchForm.getSearchField();
         List <Organiser>  list = service.search(word);
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("organisers", list);
         return "organiserList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<Organiser> organisers = service.getAll();
         List<Organiser> sorted = service.sortByName(organisers);
@@ -50,6 +52,7 @@ public class OrganiserWEBController {
         return "organiserList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -58,6 +61,7 @@ public class OrganiserWEBController {
         return "redirect:/web/organiser/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         OrganiserForm organiserForm = new OrganiserForm();
@@ -65,6 +69,7 @@ public class OrganiserWEBController {
         return "organiserAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("organiserForm") OrganiserForm organiserForm) {
         Organiser group = new Organiser();
@@ -75,6 +80,7 @@ public class OrganiserWEBController {
         return "redirect:/web/organiser/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         Organiser group = service.get(id);
@@ -85,6 +91,7 @@ public class OrganiserWEBController {
         return "organiserEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("organiserForm") OrganiserForm organiserForm) {
         Organiser group = new Organiser();

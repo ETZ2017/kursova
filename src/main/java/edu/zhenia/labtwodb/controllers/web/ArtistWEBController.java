@@ -9,6 +9,7 @@ import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
 import edu.zhenia.labtwodb.service.genre.impls.GenreServiceImpl;
 import edu.zhenia.labtwodb.service.impressario.impls.ImpressarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +42,15 @@ public class ArtistWEBController {
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public String search(Model model,
                                 @ModelAttribute("searchForm") SearchForm searchForm){
-       String word = searchForm.getSearchField();
-       List <Artist>  list = service.search(word);
+        String word = searchForm.getSearchField();
+        List <Artist>  list = service.search(word);
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("artists", list);
         return "artistList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<Artist> artists = service.getAll();
         List<Artist> sorted = service.sortByName(artists);
@@ -59,6 +61,7 @@ public class ArtistWEBController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -67,6 +70,7 @@ public class ArtistWEBController {
         return "redirect:/web/artist/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         ArtistForm artistForm = new ArtistForm();
@@ -82,6 +86,7 @@ public class ArtistWEBController {
         return "artistAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("artistForm") ArtistForm artistForm) {
         Artist group = new Artist();
@@ -96,6 +101,7 @@ public class ArtistWEBController {
         return "redirect:/web/artist/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         Artist group = service.get(id);
@@ -112,6 +118,7 @@ public class ArtistWEBController {
         return "artistEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("artistForm") ArtistForm artistForm) {
         Artist group = new Artist();

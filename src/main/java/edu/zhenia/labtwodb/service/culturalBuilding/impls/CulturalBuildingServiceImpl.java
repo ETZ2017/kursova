@@ -75,6 +75,22 @@ public class CulturalBuildingServiceImpl implements ICulturalBuildingService {
         return found;
     }
 
+    public List<CulturalBuilding> searchByName(String word) {
+        List<CulturalBuilding> culturalBuildings = this.getAll();
+        List<CulturalBuilding> found = new ArrayList<>();
+
+        String temp = word.toLowerCase();
+
+        for (CulturalBuilding culturalBuilding : culturalBuildings) {
+            if (culturalBuilding.getName().toLowerCase().contains(temp)||
+                    culturalBuilding.getName().contains(word)) {
+                found.add(culturalBuilding);
+            }
+        }
+
+        return found;
+    }
+
     public List<CulturalBuilding> searchBySpecials(String word, String word2) {
         List<CulturalBuilding> culturalBuildings = this.getAll();
         List<CulturalBuilding> found = new ArrayList<>();

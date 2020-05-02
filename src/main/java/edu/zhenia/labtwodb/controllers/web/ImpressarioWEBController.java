@@ -9,6 +9,7 @@ import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
 import edu.zhenia.labtwodb.service.genre.impls.GenreServiceImpl;
 import edu.zhenia.labtwodb.service.impressario.impls.ImpressarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class ImpressarioWEBController {
         return "impressarioList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<Impressario> impressarios = service.getAll();
         List<Impressario> sorted = service.sortByName(impressarios);
@@ -58,11 +59,13 @@ public class ImpressarioWEBController {
         } else {
             list = service.searchByName(word);
         };
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("impressarios", list);
         return "impressarioList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -71,6 +74,7 @@ public class ImpressarioWEBController {
         return "redirect:/web/impressario/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         ImpressarioForm impressarioForm = new ImpressarioForm();
@@ -86,6 +90,7 @@ public class ImpressarioWEBController {
         return "impressarioAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("impressarioForm") ImpressarioForm impressarioForm) {
         Impressario group = new Impressario();
@@ -100,6 +105,7 @@ public class ImpressarioWEBController {
         return "redirect:/web/impressario/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         Impressario group = service.get(id);
@@ -115,6 +121,7 @@ public class ImpressarioWEBController {
         return "impressarioEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("impressarioForm") ImpressarioForm impressarioForm) {
         Impressario group = new Impressario();

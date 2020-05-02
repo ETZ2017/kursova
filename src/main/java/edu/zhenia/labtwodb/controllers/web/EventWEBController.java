@@ -11,10 +11,14 @@ import edu.zhenia.labtwodb.service.event.impls.EventServiceImpl;
 import edu.zhenia.labtwodb.service.organiser.impls.OrganiserServiceImpl;
 import edu.zhenia.labtwodb.service.typeOfEvent.impls.TypeOfEventServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -45,7 +49,7 @@ public class EventWEBController {
         return "eventList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<Event> events = service.getAll();
         List<Event> sorted = service.sortByName(events);
@@ -63,29 +67,53 @@ public class EventWEBController {
         String word3 = searchForm.getSearchFieldReserve2();
         String word4 = searchForm.getSearchFieldReserve3();
         String word5 = searchForm.getSearchFieldReserve4();
+
+        String dayBeg = searchForm.getDayBeg();
+        String monthBeg = searchForm.getMonthBeg();
+        String yearBeg = searchForm.getYearBeg();
+        String dayEnd = searchForm.getDayEnd();
+        String monthEnd = searchForm.getMonthEnd();
+        String yearEnd = searchForm.getYearEnd();
+
         List<Event> list;
-        if(word == null) {
-            if(word2 == null) {
-                if(word3 == null) {
-                    if (word4 == null) {
-                        list = service.searchByContest(word5);
-                    } else {
-                        list = service.searchByOrganiser(word4);
-                    }
-                } else {
-                    list = service.searchByType(word3);
-                }
-            } else {
-                list = service.searchByBuilding(word2);
-            }
-        } else {
+        if(word != null) {
             list = service.searchByName(word);
+        } else {
+            if(word2 != null) {
+                list = service.searchByBuilding(word2);
+            } else {
+                if(word3 != null) {
+                    list = service.searchByType(word3);
+                } else {
+                    if (word4 != null) {
+                        list = service.searchByOrganiser(word4);
+                    } else {
+                        if(word5 != null) {
+                            list = service.searchByContest(word5);
+                        } else {
+                            list = service.searchByDate(dayBeg, monthBeg, yearBeg, dayEnd, monthEnd, yearEnd);
+                        }
+                    }
+                }
+            }
         };
+        searchForm.setSearchField("");
+        searchForm.setSearchFieldReserve("");
+        searchForm.setSearchFieldReserve2("");
+        searchForm.setSearchFieldReserve3("");
+        searchForm.setSearchFieldReserve4("");
+        searchForm.setDayBeg("");
+        searchForm.setDayEnd("");
+        searchForm.setMonthEnd("");
+        searchForm.setMonthBeg("");
+        searchForm.setYearBeg("");
+        searchForm.setYearEnd("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("events", list);
         return "eventList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -94,6 +122,7 @@ public class EventWEBController {
         return "redirect:/web/event/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         EventForm eventForm = new EventForm();
@@ -117,6 +146,7 @@ public class EventWEBController {
         return "eventAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("eventForm") EventForm eventForm) {
         Event group = new Event();
@@ -128,14 +158,16 @@ public class EventWEBController {
         group.setContest(contest);
         group.setOrganizer(organiser);
         group.setTypeOfEvent(type);
+        group.setDataString(eventForm.getYear()+"-"+eventForm.getMonth()+"-"+eventForm.getDay());
+        group.setData (LocalDate.parse(String.valueOf(group.getDataString())));
         group.setName(eventForm.getName());
-        group.setData(eventForm.getDate());
         group.setDescription(eventForm.getDescription());
         service.save(group);
         model.addAttribute("events", service.getAll());
         return "redirect:/web/event/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         Event group = service.get(id);
@@ -153,6 +185,9 @@ public class EventWEBController {
                 Contest::getid, Contest::getName
         ));
         groupForm.setName(group.getName());
+        groupForm.setDay(group.getDataString().substring(8,10));
+        groupForm.setMonth(group.getDataString().substring(5,7));
+        groupForm.setYear(group.getDataString().substring(0,4));
         groupForm.setBuilding(group.getBuilding().getName());
         groupForm.setContest(group.getContest().getName());
         groupForm.setOrganiser(group.getOrganizer().getFirstName());
@@ -166,6 +201,7 @@ public class EventWEBController {
         return "eventEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("eventForm") EventForm eventForm) {
         Event group = new Event();
@@ -179,6 +215,8 @@ public class EventWEBController {
         group.setContest(contest);
         group.setOrganizer(organiser);
         group.setTypeOfEvent(type);
+        group.setDataString(eventForm.getYear()+"-"+eventForm.getMonth()+"-"+eventForm.getDay());
+        group.setData (LocalDate.parse(group.getDataString()));
         group.setDescription(eventForm.getDescription());
         service.edit(group);
         model.addAttribute("events", service.getAll());

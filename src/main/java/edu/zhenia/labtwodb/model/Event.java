@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +19,8 @@ public class Event {
     private Organiser organizer;
     //private List artist;
     private Contest contest;
-    private LocalDateTime data;
+    private LocalDate data;
+    private String dataString;
     private String description;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
@@ -27,7 +29,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String id, String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Contest contest, LocalDateTime data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+    public Event(String id, String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Contest contest, LocalDate data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.name = name;
         this.building = building;
@@ -39,7 +41,7 @@ public class Event {
         this.dateModified = dateModified;
     }
 
-    public Event(String id, String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Organiser organizer, Contest contest, LocalDateTime data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+    public Event(String id, String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Organiser organizer, Contest contest, LocalDate data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.name = name;
         this.building = building;
@@ -52,13 +54,27 @@ public class Event {
         this.dateModified = dateModified;
     }
 
-    public Event(String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Organiser organizer, Contest contest, LocalDateTime data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+    public Event(String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Organiser organizer, Contest contest, LocalDate data, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.name = name;
         this.building = building;
         this.typeOfEvent = typeOfEvent;
         this.organizer = organizer;
         this.contest = contest;
         this.data = data;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+    }
+
+    public Event(String id, String name, CulturalBuilding building, TypeOfEvent typeOfEvent, Organiser organizer, Contest contest, LocalDate data, String dataString, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+        this.id = id;
+        this.name = name;
+        this.building = building;
+        this.typeOfEvent = typeOfEvent;
+        this.organizer = organizer;
+        this.contest = contest;
+        this.data = data;
+        this.dataString = dataString;
         this.description = description;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
@@ -136,13 +152,29 @@ public class Event {
         this.contest = contest;
     }
 
-    public LocalDateTime getData() {
+    public String getDataString() {
+        return dataString;
+    }
+
+    public void setDataString(String dataString) {
+        this.dataString = dataString;
+    }
+
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
+
+    /* public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }*/
 
     @Override
     public boolean equals(Object o) {

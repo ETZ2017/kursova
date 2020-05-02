@@ -10,6 +10,7 @@ import edu.zhenia.labtwodb.model.SpecialFeatures;
 import edu.zhenia.labtwodb.model.TypeOfBuilding;
 import edu.zhenia.labtwodb.service.specialFeatures.impls.SpecialFeaturesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +36,13 @@ public class SpecialFeaturesWEBController {
                          @ModelAttribute("searchForm") SearchForm searchForm){
         String word = searchForm.getSearchField();
         List <SpecialFeatures>  list = service.searchByType(word);
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("specialFeaturess", list);
         return "specialFeaturesList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<SpecialFeatures> specialFeatures = service.getAll();
         List<SpecialFeatures> sorted = service.sortByName(specialFeatures);
@@ -50,6 +52,7 @@ public class SpecialFeaturesWEBController {
         return "specialFeaturesList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -58,6 +61,7 @@ public class SpecialFeaturesWEBController {
         return "redirect:/web/specialfeatures/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         SpecialFeaturesForm specialFeaturesForm = new SpecialFeaturesForm();
@@ -65,6 +69,7 @@ public class SpecialFeaturesWEBController {
         return "specialFeaturesAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("specialFeaturesForm") SpecialFeaturesForm specialFeaturesForm) {
         SpecialFeatures group = new SpecialFeatures();
@@ -76,6 +81,7 @@ public class SpecialFeaturesWEBController {
         return "redirect:/web/specialfeatures/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         SpecialFeatures group = service.get(id);
@@ -87,6 +93,7 @@ public class SpecialFeaturesWEBController {
         return "specialFeaturesEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("specialFeaturesForm") SpecialFeaturesForm specialFeaturesForm) {
         SpecialFeatures group = new SpecialFeatures();

@@ -10,6 +10,7 @@ import edu.zhenia.labtwodb.model.TypeOfEvent;
 import edu.zhenia.labtwodb.model.Winners;
 import edu.zhenia.labtwodb.service.typeOfEvent.impls.TypeOfEventServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +36,13 @@ public class TypeOfEventWEBController {
                          @ModelAttribute("searchForm") SearchForm searchForm){
         String word = searchForm.getSearchField();
         List <TypeOfEvent>  list = service.searchByType(word);
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("typeOfEvents", list);
         return "typeOfEventList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<TypeOfEvent> typeOfBuildings = service.getAll();
         List<TypeOfEvent> sorted = service.sortByName(typeOfBuildings);
@@ -50,6 +52,7 @@ public class TypeOfEventWEBController {
         return "typeOfEventList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -58,6 +61,7 @@ public class TypeOfEventWEBController {
         return "redirect:/web/typeofevent/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         TypeOfEventForm typeOfEventForm = new TypeOfEventForm();
@@ -65,6 +69,7 @@ public class TypeOfEventWEBController {
         return "typeOfEventAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("typeOfEventForm") TypeOfEventForm typeOfEventForm) {
         TypeOfEvent group = new TypeOfEvent();
@@ -75,6 +80,7 @@ public class TypeOfEventWEBController {
         return "redirect:/web/typeofevent/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         TypeOfEvent group = service.get(id);
@@ -85,6 +91,7 @@ public class TypeOfEventWEBController {
         return "typeOfEventEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("typeOfEventForm") TypeOfEvent typeOfEvent) {
         TypeOfEvent group = new TypeOfEvent();

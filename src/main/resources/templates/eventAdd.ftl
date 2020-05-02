@@ -17,6 +17,10 @@
     <br>
     Event contest:<@spring.formSingleSelect "eventForm.contest", contest, ""/>
     <br>
+    Day:<@spring.formInput "eventForm.day", "", "text"/>
+    Month:<@spring.formInput "eventForm.month", "", "text"/>
+    Year:<@spring.formInput "eventForm.year", "", "text"/>
+    <br>
     Event description:<@spring.formInput "eventForm.description", "", "text"/>
     <br>
     <input type="submit" value="Create"/>

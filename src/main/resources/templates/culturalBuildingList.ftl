@@ -19,15 +19,29 @@
     }
 </script>
 
-<h1 style="text-align: center; margin-bottom: 10px">Cultural Building List
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"
-         onclick="myFunction()">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-</h1>
+<div>
+    <a href="/web" style="float: left; margin-top: 3px;">
+        <img src="https://img.icons8.com/ios-glyphs/24/000000/circled-left-2.png"/>
+    </a>
+    <h1 style="text-align: center; margin-bottom: 10px">Cultural Building List
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"
+             onclick="myFunction()">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </h1>
+</div>
 
 
 <div id="search" style="display:none;">
+    <fieldset>
+        <legend style="margin: 5px">Find by Name</legend>
+        <form name="search" action="" method="POST" style="margin: 5px">
+            Name:<@spring.formInput "searchForm.searchFieldReserve3", "", "text"/>
+            <br>
+            <input type="submit" value="Search" class="btn btn-info" style="margin-top: 5px"/>
+        </form>
+    </fieldset>
+    <br>
     <fieldset>
         <legend style="margin: 5px">Find by Type</legend>
         <form name="search" action="" method="POST" style="margin: 5px">
@@ -54,7 +68,7 @@
     <tr>
         <th>id</th>
         <th>Name
-            <a href="/web/building/list/sorted" type="button" class="btn btn-outline-light">
+            <a href="/web/building/sorted" type="button" class="btn btn-outline-light">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                      stroke-linejoin="round" class="feather feather-filter">
