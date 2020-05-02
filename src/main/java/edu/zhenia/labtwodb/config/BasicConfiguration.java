@@ -34,8 +34,9 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .httpBasic()
-                .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied.jsp");
+                /*.and()
+                .exceptionHandling().accessDeniedPage("/accessDenied.jsp")*/
+                ;
 
     }
 
