@@ -31,6 +31,7 @@ public class ArtistWEBController {
     @Autowired
     ImpressarioServiceImpl impressarioService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     String getall(Model model){
         SearchForm searchForm = new SearchForm();
@@ -39,6 +40,7 @@ public class ArtistWEBController {
         return "artistList";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public String search(Model model,
                                 @ModelAttribute("searchForm") SearchForm searchForm){
@@ -50,6 +52,7 @@ public class ArtistWEBController {
         return "artistList";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<Artist> artists = service.getAll();
