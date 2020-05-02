@@ -10,6 +10,7 @@ import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
 import edu.zhenia.labtwodb.service.artistImpressario.impls.ArtistImpressarioServiceImpl;
 import edu.zhenia.labtwodb.service.impressario.impls.ImpressarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -52,12 +53,13 @@ public class ArtistImpressarioWEBController {
         } else {
             list = service.searchByArtist(word);
         };
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("artistImpressarios", list);
         return "artistImpressarioList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<ArtistImpressario> artists = service.getAll();
         List<ArtistImpressario> sorted = service.sortByName(artists);
@@ -67,6 +69,7 @@ public class ArtistImpressarioWEBController {
         return "artistImpressarioList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -75,6 +78,7 @@ public class ArtistImpressarioWEBController {
         return "redirect:/web/artistimpressario/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         ArtistImpressarioForm artistImpressarioForm = new ArtistImpressarioForm();
@@ -82,7 +86,7 @@ public class ArtistImpressarioWEBController {
                 Artist::getid, Artist::getFirstName
         ));
         Map<String, String> impressario =  impressarioService.getAll().stream().collect(Collectors.toMap(
-               Impressario::getid, Impressario::getFirstName
+                Impressario::getid, Impressario::getFirstName
         ));
         model.addAttribute("artistImpressarioForm", artistImpressarioForm);
         model.addAttribute("artist", artist);
@@ -90,6 +94,7 @@ public class ArtistImpressarioWEBController {
         return "artistImpressarioAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("artistImpressarioForm") ArtistImpressarioForm artistImpressarioForm) {
         ArtistImpressario group = new ArtistImpressario();
@@ -102,6 +107,7 @@ public class ArtistImpressarioWEBController {
         return "redirect:/web/artistimpressario/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         ArtistImpressario group = service.get(id);
@@ -120,6 +126,7 @@ public class ArtistImpressarioWEBController {
         return "artistImpressarioEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("artistImpressarioForm") ArtistImpressarioForm artistImpressarioForm) {
         ArtistImpressario group = new ArtistImpressario();

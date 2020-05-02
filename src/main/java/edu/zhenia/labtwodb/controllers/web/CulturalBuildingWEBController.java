@@ -6,6 +6,7 @@ import edu.zhenia.labtwodb.service.culturalBuilding.impls.CulturalBuildingServic
 import edu.zhenia.labtwodb.service.specialFeatures.impls.SpecialFeaturesServiceImpl;
 import edu.zhenia.labtwodb.service.typeOfBuilding.impls.TypeOfBuildingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,18 +41,24 @@ public class CulturalBuildingWEBController {
         String word = searchForm.getSearchField();
         String word2 = searchForm.getSearchFieldReserve();
         String word3 = searchForm.getSearchFieldReserve2();
+        String word4 = searchForm.getSearchFieldReserve3();
         List<CulturalBuilding> list;
         if(word == null) {
-            list = service.searchBySpecials(word2, word3);
+            if(word4 == null) {
+                list = service.searchBySpecials(word2, word3);
+            } else {
+                list= service.searchByName(word4);
+            }
         } else {
             list = service.searchByType(word);
         };
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("culturalBuildings", list);
         return "culturalBuildingList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<CulturalBuilding> buildings = service.getAll();
         List<CulturalBuilding> sorted = service.sortByName(buildings);
@@ -61,6 +68,7 @@ public class CulturalBuildingWEBController {
         return "culturalBuildingList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -69,6 +77,7 @@ public class CulturalBuildingWEBController {
         return "redirect:/web/building/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         CulturalBuildingForm culturalBuildingForm = new CulturalBuildingForm();
@@ -84,6 +93,7 @@ public class CulturalBuildingWEBController {
         return "culturalBuildingAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("culturalBuildingForm") CulturalBuildingForm culturalBuildingForm) {
         CulturalBuilding group = new CulturalBuilding();
@@ -99,6 +109,7 @@ public class CulturalBuildingWEBController {
         return "redirect:/web/building/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         CulturalBuilding group = service.get(id);
@@ -120,6 +131,7 @@ public class CulturalBuildingWEBController {
         return "culturalBuildingEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("culturalBuildingForm") CulturalBuildingForm culturalBuildingForm) {
         CulturalBuilding group = new CulturalBuilding();

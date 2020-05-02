@@ -4,6 +4,7 @@ import edu.zhenia.labtwodb.forms.*;
 import edu.zhenia.labtwodb.model.*;
 import edu.zhenia.labtwodb.service.places.impls.PlacesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +30,13 @@ public class PlacesWEBController {
                          @ModelAttribute("searchForm") SearchForm searchForm){
         String word = searchForm.getSearchField();
         List <Places>  list = service.search(word);
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("placess", list);
         return "placesList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<Places> places = service.getAll();
         List<Places> sorted = service.sortByName(places);
@@ -44,6 +46,7 @@ public class PlacesWEBController {
         return "placesList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -52,6 +55,7 @@ public class PlacesWEBController {
         return "redirect:/web/places/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         PlacesForm placesForm = new PlacesForm();
@@ -59,6 +63,7 @@ public class PlacesWEBController {
         return "placesAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("placesForm") PlacesForm placesForm) {
         Places group = new Places();
@@ -69,6 +74,7 @@ public class PlacesWEBController {
         return "redirect:/web/places/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         Places group = service.get(id);
@@ -79,6 +85,7 @@ public class PlacesWEBController {
         return "placesEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("placesForm") PlacesForm placesForm) {
         Places group = new Places();

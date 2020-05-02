@@ -21,12 +21,17 @@
     }
 </script>
 
-<h1 style="text-align: center; margin-bottom: 10px">Artist List
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"
-         onclick="myFunction()">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-</h1>
+<div>
+    <a href="/web" style="float: left; margin-top: 3px;">
+        <img src="https://img.icons8.com/ios-glyphs/24/000000/circled-left-2.png"/>
+    </a>
+    <h1 style="text-align: center; margin-bottom: 10px">Artist List
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"
+             onclick="myFunction()">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </h1>
+</div>
 
 
 <div id="search" style="display: none">
@@ -40,22 +45,21 @@
     </fieldset>
 </div>
 
-<br>
 
 <div>
     <table border="3"class="table table-sm table-dark">
         <tr>
             <th>id</th>
             <th>Full name
-                <a href="/web/artist/list/sorted" type="button" class="btn btn-outline-light">
+                <a href="/web/artist/sorted" type="button" class="btn btn-outline-light">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                          stroke-linejoin="round" class="feather feather-filter">
                         <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></a>
                 <a href="/web/artist/list" type="button" class="btn btn-outline-light">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                          class="feather feather-rotate-ccw"><polyline points="1 4 1 10 7 10"/>
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-rotate-ccw"><polyline points="1 4 1 10 7 10"/>
                         <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
                     Undo sort</a>
             </th>
@@ -71,7 +75,7 @@
                 <td>${artist.id}</td>
                 <td>${artist.firstName}</td>
                 <td>${artist.genre.genre}</td>
-<#--                <td>${artist.impressario.firstName}</td>-->
+                <#--                <td>${artist.impressario.firstName}</td>-->
                 <td>${artist.description}</td>
                 <td><a href="delete/${artist.id}"><button>Delete</button></a></td>
                 <td><a href="edit/${artist.id}"><button>Edit</button></a></td>
@@ -82,4 +86,3 @@
 </div>
 </body>
 </html>
-

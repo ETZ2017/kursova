@@ -6,6 +6,12 @@ public class SearchForm {
     private String searchFieldReserve2;
     private String searchFieldReserve3;
     private String searchFieldReserve4;
+    private String dayBeg;
+    private String monthBeg;
+    private String yearBeg;
+    private String dayEnd;
+    private String monthEnd;
+    private String yearEnd;
 
     public SearchForm() {
     }
@@ -48,6 +54,54 @@ public class SearchForm {
 
     public void setSearchFieldReserve4(String searchFieldReserve4) {
         this.searchFieldReserve4 = searchFieldReserve4;
+    }
+
+    public String getDayBeg() {
+        return dayBeg;
+    }
+
+    public void setDayBeg(String dayBeg) {
+        this.dayBeg = dayBeg;
+    }
+
+    public String getMonthBeg() {
+        return monthBeg;
+    }
+
+    public void setMonthBeg(String monthBeg) {
+        this.monthBeg = monthBeg;
+    }
+
+    public String getYearBeg() {
+        return yearBeg;
+    }
+
+    public void setYearBeg(String yearBeg) {
+        this.yearBeg = yearBeg;
+    }
+
+    public String getDayEnd() {
+        return dayEnd;
+    }
+
+    public void setDayEnd(String dayEnd) {
+        this.dayEnd = dayEnd;
+    }
+
+    public String getMonthEnd() {
+        return monthEnd;
+    }
+
+    public void setMonthEnd(String monthEnd) {
+        this.monthEnd = monthEnd;
+    }
+
+    public String getYearEnd() {
+        return yearEnd;
+    }
+
+    public void setYearEnd(String yearEnd) {
+        this.yearEnd = yearEnd;
     }
 
     @Override

@@ -11,6 +11,7 @@ import edu.zhenia.labtwodb.service.places.impls.PlacesServiceImpl;
 import edu.zhenia.labtwodb.service.typeOfEvent.impls.TypeOfEventServiceImpl;
 import edu.zhenia.labtwodb.service.winners.impls.WinnersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,19 +52,20 @@ public class WinnersWEBController {
         List<Winners> list;
         if(word == null) {
             if(word3 == null) {
-            list = service.searchByContest(word2);
+                list = service.searchByContest(word2);
             } else {
                 list = service.searchByPlace(word3);
             }
         } else {
             list = service.searchByArtist(word);
         };
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("winnerss", list);
         return "winnersList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<Winners> winners = service.getAll();
         List<Winners> sorted = service.sortByName(winners);
@@ -73,6 +75,7 @@ public class WinnersWEBController {
         return "winnersList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -81,6 +84,7 @@ public class WinnersWEBController {
         return "redirect:/web/winners/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         WinnersForm winnersForm = new WinnersForm();
@@ -100,6 +104,7 @@ public class WinnersWEBController {
         return "winnersAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("winnersForm") WinnersForm winnersForm) {
         Winners group = new Winners();
@@ -115,6 +120,7 @@ public class WinnersWEBController {
         return "redirect:/web/winners/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         Winners group = service.get(id);
@@ -139,6 +145,7 @@ public class WinnersWEBController {
         return "winnersEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("winnersForm") WinnersForm winnersForm) {
         Winners group = new Winners();

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -153,6 +154,27 @@ public class EventServiceImpl implements IEventService {
         for (Event event : events) {
             if (event.getOrganizer().getFirstName().toLowerCase().contains(temp)||
                     event.getOrganizer().getFirstName().contains(word)) {
+                found.add(event);
+            }
+        }
+
+        return found;
+    }
+
+    public List<Event> searchByDate(String dayBeg, String monthBeg, String yearBeg,
+                                    String dayEnd, String monthEnd, String yearEnd) {
+        List<Event> events = this.getAll();
+        List<Event> found = new ArrayList<>();
+
+        LocalDate beginning = LocalDate.parse(yearBeg+"-"+monthBeg+"-"+dayBeg);
+        LocalDate ending = LocalDate.parse(yearEnd+"-"+monthEnd+"-"+dayEnd);
+
+        for (Event event : events) {
+            if (event.getData().compareTo(beginning) > 0 && ending.compareTo(event.getData()) > 0 ||
+                    event.getData().compareTo(beginning) == 0 && ending.compareTo(event.getData()) > 0 ||
+                    event.getData().compareTo(beginning) > 0 && ending.compareTo(event.getData()) == 0 ||
+                    event.getData().compareTo(beginning) == 0 && ending.compareTo(event.getData()) == 0
+            ) {
                 found.add(event);
             }
         }

@@ -9,6 +9,7 @@ import edu.zhenia.labtwodb.service.artistInGenre.impls.ArtistInGenreServiceImpl;
 import edu.zhenia.labtwodb.service.event.impls.EventServiceImpl;
 import edu.zhenia.labtwodb.service.genre.impls.GenreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,12 +52,13 @@ public class ArtistInGenreWEBController {
         } else {
             list = service.searchByArtist(word);
         };
+        searchForm.setSearchField("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("artistInGenres", list);
         return "artistInGenreList";
     }
 
-    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
     public String showSorted(Model model) {
         List<ArtistInGenre> artists = service.getAll();
         List<ArtistInGenre> sorted = service.sortByName(artists);
@@ -66,6 +68,7 @@ public class ArtistInGenreWEBController {
         return "artistInGenreList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     String delete(Model model,
                   @PathVariable("id") String id) {
@@ -74,6 +77,7 @@ public class ArtistInGenreWEBController {
         return "redirect:/web/artistInGenre/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
         ArtistInGenreForm artistInGenreForm = new ArtistInGenreForm();
@@ -89,6 +93,7 @@ public class ArtistInGenreWEBController {
         return "artistInGenreAdd";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("artistInGenreForm") ArtistInGenreForm artistInGenreForm) {
         ArtistInGenre group = new ArtistInGenre();
@@ -101,6 +106,7 @@ public class ArtistInGenreWEBController {
         return "redirect:/web/artistingenre/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     String edit(Model model, @PathVariable("id") String id) {
         ArtistInGenre group = service.get(id);
@@ -119,6 +125,7 @@ public class ArtistInGenreWEBController {
         return "artistInGenreEdit";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("artistInGenreForm") ArtistInGenreForm artistInGenreForm) {
         ArtistInGenre group = new ArtistInGenre();

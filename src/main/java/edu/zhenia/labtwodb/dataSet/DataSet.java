@@ -3,6 +3,7 @@ package edu.zhenia.labtwodb.dataSet;
 import edu.zhenia.labtwodb.model.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,7 +67,7 @@ public class DataSet {
                     new TypeOfEvent("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
                     new Organiser("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
                     new Contest("1", "name", "description", LocalDateTime.now(), LocalDateTime.now()),
-                    LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now()),
+                    LocalDate.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now()),
             new Event("2", "ame",
                     new CulturalBuilding("2", "fame",
                             new TypeOfBuilding("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
@@ -75,7 +76,7 @@ public class DataSet {
                     new TypeOfEvent("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
                     new Organiser("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
                     new Contest("1", "name", "description", LocalDateTime.now(), LocalDateTime.now()),
-                    LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now())
+                    LocalDate.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now())
     ));
 
     private List<ArtistInGenre> artistInGenres = new ArrayList<>(Arrays.asList(
@@ -105,7 +106,7 @@ public class DataSet {
                             new TypeOfEvent("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
                             new Organiser("1", "name", "qwerty", LocalDateTime.now(), LocalDateTime.now()),
                             new Contest("1", "name", "description", LocalDateTime.now(), LocalDateTime.now()),
-                            LocalDateTime.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now()),  new Contest("1", "name", "description", LocalDateTime.now(), LocalDateTime.now()), LocalDateTime.now())
+                            LocalDate.now(),"qwerty", LocalDateTime.now(), LocalDateTime.now()),  new Contest("1", "name", "description", LocalDateTime.now(), LocalDateTime.now()), LocalDateTime.now())
 
     ));
 

@@ -1,17 +1,20 @@
+<#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
-<html lang="en" style="opacity: 0.7;
-                       background-image: url(AxonizeBlog_SinglePost_815x600_FacilityintoSmartBuilding.jpg)">
+<html lang="en" style="background-image:url(https://buildint.co/wp-content/uploads/2019/06/futuresmart_1.png);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;">
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All Tables</title>
 </head>
 <body>
 <table class="centered" style="background-color: white;
-                               opacity: 0.7;
-                               font-family: 'Gill Sans MT Condensed';
-                               font-size: 3em;">
+                                   opacity: 0.5;
+                                   font-family: 'Gill Sans MT Condensed';
+                                   font-size: 3em;">
     <thead>
     <tr>
         <th>Tables</th>
