@@ -1,5 +1,6 @@
 package edu.zhenia.labtwodb.controllers.web;
 
+import edu.zhenia.labtwodb.dao.artist.impls.DaoImplFake;
 import edu.zhenia.labtwodb.forms.ArtistForm;
 import edu.zhenia.labtwodb.forms.ContestForm;
 import edu.zhenia.labtwodb.forms.OrganiserForm;

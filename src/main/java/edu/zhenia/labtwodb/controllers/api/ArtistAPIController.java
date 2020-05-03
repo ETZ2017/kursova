@@ -1,5 +1,6 @@
 package edu.zhenia.labtwodb.controllers.api;
 
+import edu.zhenia.labtwodb.dao.artist.impls.DaoImplFake;
 import edu.zhenia.labtwodb.model.Artist;
 import edu.zhenia.labtwodb.service.artist.impls.ArtistServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
