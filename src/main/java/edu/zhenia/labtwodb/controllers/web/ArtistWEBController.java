@@ -10,6 +10,7 @@ import edu.zhenia.labtwodb.service.genre.impls.GenreServiceImpl;
 import edu.zhenia.labtwodb.service.impressario.impls.ImpressarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -76,6 +77,7 @@ public class ArtistWEBController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
+        System.out.println("Called");
         ArtistForm artistForm = new ArtistForm();
         Map<String, String> mavs =  genreService.getAll().stream().collect(Collectors.toMap(
                 Genre::getid, Genre::getGenre
