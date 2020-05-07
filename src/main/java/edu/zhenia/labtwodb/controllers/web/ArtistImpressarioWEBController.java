@@ -118,6 +118,7 @@ public class ArtistImpressarioWEBController {
         Map<String, String> impressario =  impressarioService.getAll().stream().collect(Collectors.toMap(
                 Impressario::getid, Impressario::getFirstName
         ));
+        groupForm.setId(group.getId());
         groupForm.setArtist(group.getArtist().getFirstName());
         groupForm.setImpressario(group.getImpressario().getFirstName());
         model.addAttribute("artistImpressarioForm", groupForm);
@@ -132,6 +133,7 @@ public class ArtistImpressarioWEBController {
         ArtistImpressario group = new ArtistImpressario();
         Artist artist = artistService.get(artistImpressarioForm.getArtist());
         Impressario impressario = impressarioService.get(artistImpressarioForm.getImpressario());
+        group.setId(artistImpressarioForm.getId());
         group.setArtist(artist);
         group.setImpressario(impressario);
         service.edit(group);

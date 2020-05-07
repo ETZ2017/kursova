@@ -77,16 +77,16 @@ public class ArtistWEBController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping( value = "/create", method = RequestMethod.GET)
     String create(Model model){
-        System.out.println("Called");
+//        System.out.println("Called");
         ArtistForm artistForm = new ArtistForm();
-        Map<String, String> mavs =  genreService.getAll().stream().collect(Collectors.toMap(
+        /*Map<String, String> mavs =  genreService.getAll().stream().collect(Collectors.toMap(
                 Genre::getid, Genre::getGenre
-        ));
+        ));*/
         /*Map<String, String> impressario =  impressarioService.getAll().stream().collect(Collectors.toMap(
                 Impressario::getid, Impressario::getFirstName
         ));*/
         model.addAttribute("artistForm", artistForm);
-        model.addAttribute("mavs", mavs);
+//        model.addAttribute("mavs", mavs);
        // model.addAttribute("impressario", impressario);
         return "artistAdd";
     }
@@ -95,10 +95,10 @@ public class ArtistWEBController {
     @RequestMapping( value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("artistForm") ArtistForm artistForm) {
         Artist group = new Artist();
-        Genre genre = genreService.get(artistForm.getGenre());
+//        Genre genre = genreService.get(artistForm.getGenre());
         //Impressario impressario = impressarioService.get(artistForm.getImpressario());
         group.setFirstName(artistForm.getFirstname());
-        group.setGenre(genre);
+//        group.setGenre(genre);
         //group.setImpressario(impressario);
         group.setDescription(artistForm.getDescription());
         service.save(group);
@@ -111,15 +111,15 @@ public class ArtistWEBController {
     String edit(Model model, @PathVariable("id") String id) {
         Artist group = service.get(id);
         ArtistForm groupForm = new ArtistForm();
-        Map<String, String> mavs = genreService.getAll().stream()
-                .collect(Collectors.toMap(Genre::getid, Genre::getGenre));
+//        Map<String, String> mavs = genreService.getAll().stream()
+//                .collect(Collectors.toMap(Genre::getid, Genre::getGenre));
 
         groupForm.setId(group.getid());
         groupForm.setFirstname(group.getFirstName());
-        groupForm.setGenre(group.getGenre().getGenre());
+//        groupForm.setGenre(group.getGenre().getGenre());
         groupForm.setDescription(group.getDescription());
         model.addAttribute("artistForm", groupForm);
-        model.addAttribute("mavs", mavs);
+//        model.addAttribute("mavs", mavs);
         return "artistEdit";
     }
 
@@ -128,8 +128,8 @@ public class ArtistWEBController {
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("artistForm") ArtistForm artistForm) {
         Artist group = new Artist();
         group.setid(artistForm.getId());
-        Genre genre = genreService.get(artistForm.getGenre());
-        group.setGenre(genre);
+//        Genre genre = genreService.get(artistForm.getGenre());
+//        group.setGenre(genre);
         group.setFirstName(artistForm.getFirstname());
         group.setDescription(artistForm.getDescription());
         service.edit(group);

@@ -1,10 +1,12 @@
 package edu.zhenia.labtwodb.forms;
 
 public class ArtistInGenreForm {
+    private String id;
     private String artist;
     private String genre;
 
-    public ArtistInGenreForm(String artist, String genre) {
+    public ArtistInGenreForm(String id, String artist, String genre) {
+        this.id = id;
         this.artist = artist;
         this.genre = genre;
     }
@@ -26,6 +28,14 @@ public class ArtistInGenreForm {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

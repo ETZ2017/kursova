@@ -11,7 +11,7 @@ public class Artist {
     @Id
     private String id;
     private String firstName;
-    private Genre genre;
+//    private Genre genre;
     private String description;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
@@ -19,18 +19,9 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String id, String firstName, Genre genre, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
+    public Artist(String id, String firstName, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.id = id;
         this.firstName = firstName;
-        this.genre = genre;
-        this.description = description;
-        this.dateCreated = dateCreated;
-        this.dateModified = dateModified;
-    }
-
-    public Artist(String firstName, Genre genre, String description, LocalDateTime dateCreated, LocalDateTime dateModified) {
-        this.firstName = firstName;
-        this.genre = genre;
         this.description = description;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
@@ -64,6 +55,8 @@ public class Artist {
         return dateModified;
     }
 
+
+
     public void setDateModified(LocalDateTime dateModified) {
         this.dateModified = dateModified;
     }
@@ -76,13 +69,13 @@ public class Artist {
         this.firstName = firstName;
     }
 
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
+//    public Genre getGenre() {
+//        return genre;
+//    }
+//
+//    public void setGenre(Genre genre) {
+//        this.genre = genre;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -102,7 +95,6 @@ public class Artist {
         return "Artist{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", genre=" + genre +
                 ", description='" + description + '\'' +
                 ", dateCreated=" + dateCreated +
                 ", dateModified=" + dateModified +

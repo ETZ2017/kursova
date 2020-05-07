@@ -3,15 +3,15 @@ package edu.zhenia.labtwodb.forms;
 public class ArtistForm {
     private String id;
     private String firstname;
-    private String genre;
+//    private String genre;
     private String description;
 
     public ArtistForm() {
     }
 
-    public ArtistForm(String firstname, String genre, String description) {
+    public ArtistForm(String id, String firstname, String description) {
+        this.id = id;
         this.firstname = firstname;
-        this.genre = genre;
         this.description = description;
     }
 
@@ -23,13 +23,13 @@ public class ArtistForm {
         this.id = id;
     }
 
-    public void setGenre(String genre) {
+    /*public void setGenre(String genre) {
         this.genre = genre;
     }
 
     public String getGenre() {
         return genre;
-    }
+    }*/
 
     public String getFirstname() {
         return firstname;
@@ -50,8 +50,8 @@ public class ArtistForm {
     @Override
     public String toString() {
         return "ArtistForm{" +
-                "firstname='" + firstname + '\'' +
-                ", genre='" + genre + '\'' +
+                "id='" + id + '\'' +
+                ", firstname='" + firstname + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

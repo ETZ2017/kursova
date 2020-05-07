@@ -139,6 +139,7 @@ public class ArtistAtEventWEBController {
         ));
 //        group.setDateCreated(group.getDateCreated());
 //        group.setDateModified(LocalDateTime.now());
+        groupForm.setId(group.getId());
         groupForm.setArtist(group.getArtist().getFirstName());
         groupForm.setEvent(group.getEvent().getName());
         //groupForm.setContest(group.getContest().getName());
@@ -154,8 +155,9 @@ public class ArtistAtEventWEBController {
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("artistAtEventForm") ArtistAtEventForm artistAtEventForm) {
         ArtistAtEvent group = new ArtistAtEvent();
         Event event = eventService.get(artistAtEventForm.getEvent());
-        Contest contest = contestService.get(artistAtEventForm.getContest());
+//        Contest contest = contestService.get(artistAtEventForm.getContest());
         Artist artist = artistService.get(artistAtEventForm.getArtist());
+        group.setId(artistAtEventForm.getId());
         group.setArtist(artist);
         //group.setContest(contest);
         group.setEvent(event);

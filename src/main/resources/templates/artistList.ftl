@@ -63,7 +63,7 @@
                         <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
                     Undo sort</a>
             </th>
-            <th>Artist`s genre</th>
+<#--            <th>Artist`s genre</th>-->
             <th>Description</th>
             <th>Delete</th>
             <th>Edit</th>
@@ -74,7 +74,7 @@
             <tr class="bg-info">
                 <td>${artist.id}</td>
                 <td>${artist.firstName}</td>
-                <td>${artist.genre.genre}</td>
+<#--                <td>${artist.genre.genre}</td>-->
 <#--                <td>${artist.impressario.firstName}</td>-->
                 <td>${artist.description}</td>
                 <td><a href="delete/${artist.id}"><button>Delete</button></a></td>

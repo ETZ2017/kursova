@@ -74,7 +74,7 @@ public class ArtistInGenreWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("artistInGenres", service.getAll());
-        return "redirect:/web/artistInGenre/list";
+        return "redirect:/web/artistingenre/list";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -117,11 +117,12 @@ public class ArtistInGenreWEBController {
         Map<String, String> genre =  genreService.getAll().stream().collect(Collectors.toMap(
                 Genre::getid, Genre::getGenre
         ));
+        groupForm.setId(group.getId());
         groupForm.setGenre(group.getGenre().getGenre());
         groupForm.setArtist(group.getArtist().getFirstName());
-        model.addAttribute("artistInGenreForm", groupForm);
         model.addAttribute("mavs", mavs);
         model.addAttribute("genre", genre);
+        model.addAttribute("artistInGenreForm", groupForm);
         return "artistInGenreEdit";
     }
 
@@ -129,6 +130,7 @@ public class ArtistInGenreWEBController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("artistInGenreForm") ArtistInGenreForm artistInGenreForm) {
         ArtistInGenre group = new ArtistInGenre();
+        group.setId(artistInGenreForm.getId());
         Artist artist = artistService.get(artistInGenreForm.getArtist());
         Genre genre = genreService.get(artistInGenreForm.getGenre());
         group.setGenre(genre);

@@ -3,6 +3,7 @@ package edu.zhenia.labtwodb.forms;
 import java.time.LocalDateTime;
 
 public class ArtistAtEventForm {
+    private String id;
     private String artist;
     private String event;
     private String contest;
@@ -12,11 +13,13 @@ public class ArtistAtEventForm {
     public ArtistAtEventForm() {
     }
 
-    public ArtistAtEventForm(String artist, String event, String contest) {
+    public ArtistAtEventForm(String id, String artist, String event, String contest) {
+        this.id = id;
         this.artist = artist;
         this.event = event;
         this.contest = contest;
     }
+
 
     /*public ArtistAtEventForm(String artist, String event, String contest, LocalDateTime dateCreated, LocalDateTime dateModified) {
         this.artist = artist;
@@ -41,6 +44,14 @@ public class ArtistAtEventForm {
     public void setDateModified(LocalDateTime dateModified) {
         this.dateModified = dateModified;
     }*/
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getArtist() {
         return artist;
