@@ -85,7 +85,7 @@ public class ArtistAtEventWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("artistAtEvents", service.getAll());
-        return "artistAtEventList";
+        return "redirect:/web/artistatevent/list";
     }
 
     @PreAuthorize("hasRole('ADMIN')")

@@ -47,7 +47,7 @@
 
 
 <div>
-    <table border="3"class="table table-sm table-dark">
+    <table border="3" class="table table-sm table-dark">
         <tr>
             <th>id</th>
             <th>Full name
