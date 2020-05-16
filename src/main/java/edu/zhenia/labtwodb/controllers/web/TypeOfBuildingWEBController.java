@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/web/typeofbuilding")
@@ -72,9 +74,17 @@ public class TypeOfBuildingWEBController {
         TypeOfBuilding group = new TypeOfBuilding();
         group.setType(typeOfBuildingForm.getType());
         group.setDescription(typeOfBuildingForm.getDescription());
-        service.save(group);
-        model.addAttribute("typeOfBuildings", service.getAll());
-        return "redirect:/web/typeofbuilding/list";
+
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getType());
+        if(matcher.matches()){
+            service.save(group);
+            model.addAttribute("typeOfBuildings", service.getAll());
+            return "redirect:/web/typeofbuilding/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -95,8 +105,16 @@ public class TypeOfBuildingWEBController {
         group.setid(id);
         group.setType(typeOfBuilding.getType());
         group.setDescription(typeOfBuilding.getDescription());
-        service.edit(group);
-        model.addAttribute("tupeOfBuildings", service.getAll());
-        return "redirect:/web/typeofbuilding/list";
+
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getType());
+        if(matcher.matches()){
+            service.edit(group);
+            model.addAttribute("tupeOfBuildings", service.getAll());
+            return "redirect:/web/typeofbuilding/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

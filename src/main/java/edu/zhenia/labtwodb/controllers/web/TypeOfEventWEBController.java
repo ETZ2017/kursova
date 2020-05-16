@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/web/typeofevent")
@@ -75,9 +77,16 @@ public class TypeOfEventWEBController {
         TypeOfEvent group = new TypeOfEvent();
         group.setType(typeOfEventForm.getType());
         group.setDescription(typeOfEventForm.getDescription());
-        service.save(group);
-        model.addAttribute("typeOfEvents", service.getAll());
-        return "redirect:/web/typeofevent/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getType());
+        if(matcher.matches()){
+            service.save(group);
+            model.addAttribute("typeOfEvents", service.getAll());
+            return "redirect:/web/typeofevent/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -98,8 +107,15 @@ public class TypeOfEventWEBController {
         group.setid(id);
         group.setType(typeOfEvent.getType());
         group.setDescription(typeOfEvent.getDescription());
-        service.edit(group);
-        model.addAttribute("typeOfEvents", service.getAll());
-        return "redirect:/web/typeofevent/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getType());
+        if(matcher.matches()){
+            service.edit(group);
+            model.addAttribute("typeOfEvents", service.getAll());
+            return "redirect:/web/typeofevent/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

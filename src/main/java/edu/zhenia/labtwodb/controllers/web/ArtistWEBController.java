@@ -13,11 +13,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Controller
@@ -101,10 +105,19 @@ public class ArtistWEBController {
 //        group.setGenre(genre);
         //group.setImpressario(impressario);
         group.setDescription(artistForm.getDescription());
-        service.save(group);
-        model.addAttribute("artists", service.getAll());
-        return "redirect:/web/artist/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z]{1,15}[ ][A-Z]{1}[a-z]{1,15}");
+        Matcher matcher = pattern.matcher(group.getFirstName());
+        if(matcher.matches()) {
+            service.save(group);
+            model.addAttribute("artists", service.getAll());
+            return "redirect:/web/artist/list";
+        } else {
+            return "validationFailed";
+        }
+
     }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -132,8 +145,17 @@ public class ArtistWEBController {
 //        group.setGenre(genre);
         group.setFirstName(artistForm.getFirstname());
         group.setDescription(artistForm.getDescription());
-        service.edit(group);
-        model.addAttribute("artists", service.getAll());
-        return "redirect:/web/artist/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z]{1,15}[ ][A-Z]{1}[a-z]{1,15}");
+        Matcher matcher = pattern.matcher(group.getFirstName());
+        if(matcher.matches()) {
+            service.edit(group);
+            model.addAttribute("artists", service.getAll());
+            return "redirect:/web/artist/list";
+        } else {
+            return "validationFailed";
+        }
     }
+
+
 }

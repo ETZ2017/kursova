@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/web/places")
@@ -69,9 +71,18 @@ public class PlacesWEBController {
         Places group = new Places();
         group.setPlace(placesForm.getPlace());
         group.setDescription(placesForm.getDescription());
-        service.save(group);
-        model.addAttribute("placess", service.getAll());
-        return "redirect:/web/places/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z]{1,10}[ ][a-z]{1,10}");
+        Pattern pattern2 = Pattern.compile("^[0-9][a-z]{1,10}");
+        Matcher matcher = pattern.matcher(group.getPlace());
+        Matcher matcher2 = pattern2.matcher(group.getPlace());
+        if(matcher.matches() || matcher2.matches()){
+            service.save(group);
+            model.addAttribute("placess", service.getAll());
+            return "redirect:/web/places/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -92,8 +103,17 @@ public class PlacesWEBController {
         group.setid(id);
         group.setPlace(placesForm.getPlace());
         group.setDescription(placesForm.getDescription());
-        service.edit(group);
-        model.addAttribute("placess", service.getAll());
-        return "redirect:/web/places/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z]{1,10}[ ][a-z]{1,10}");
+        Pattern pattern2 = Pattern.compile("^[0-9][a-z]{1,10}");
+        Matcher matcher = pattern.matcher(group.getPlace());
+        Matcher matcher2 = pattern2.matcher(group.getPlace());
+        if(matcher.matches() || matcher2.matches()){
+            service.edit(group);
+            model.addAttribute("placess", service.getAll());
+            return "redirect:/web/places/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

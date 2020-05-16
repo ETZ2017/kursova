@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Controller
@@ -158,13 +160,28 @@ public class EventWEBController {
         group.setContest(contest);
         group.setOrganizer(organiser);
         group.setTypeOfEvent(type);
+        if(eventForm.getMonth().length()< 2) {
+            String newValue = "0" + eventForm.getMonth();
+            eventForm.setMonth(newValue);
+        }
+        if(eventForm.getDay().length()< 2) {
+            String newValue = "0" + eventForm.getDay();
+            eventForm.setDay(newValue);
+        }
         group.setDataString(eventForm.getYear()+"-"+eventForm.getMonth()+"-"+eventForm.getDay());
         group.setData (LocalDate.parse(String.valueOf(group.getDataString())));
         group.setName(eventForm.getName());
         group.setDescription(eventForm.getDescription());
-        service.save(group);
-        model.addAttribute("events", service.getAll());
-        return "redirect:/web/event/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getName());
+        if(matcher.matches()){
+            service.save(group);
+            model.addAttribute("events", service.getAll());
+            return "redirect:/web/event/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -215,11 +232,26 @@ public class EventWEBController {
         group.setContest(contest);
         group.setOrganizer(organiser);
         group.setTypeOfEvent(type);
+        if(eventForm.getMonth().length()< 2) {
+            String newValue = "0" + eventForm.getMonth();
+            eventForm.setMonth(newValue);
+        }
+        if(eventForm.getDay().length()< 2) {
+            String newValue = "0" + eventForm.getDay();
+            eventForm.setDay(newValue);
+        }
         group.setDataString(eventForm.getYear()+"-"+eventForm.getMonth()+"-"+eventForm.getDay());
         group.setData (LocalDate.parse(group.getDataString()));
         group.setDescription(eventForm.getDescription());
-        service.edit(group);
-        model.addAttribute("events", service.getAll());
-        return "redirect:/web/event/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getName());
+        if(matcher.matches()){
+            service.edit(group);
+            model.addAttribute("events", service.getAll());
+            return "redirect:/web/event/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

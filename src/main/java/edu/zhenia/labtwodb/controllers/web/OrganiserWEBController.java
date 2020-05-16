@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/web/organiser")
@@ -75,9 +77,16 @@ public class OrganiserWEBController {
         Organiser group = new Organiser();
         group.setFirstName(organiserForm.getFirstname());
         group.setDescription(organiserForm.getDescription());
-        service.save(group);
-        model.addAttribute("organisers", service.getAll());
-        return "redirect:/web/organiser/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z]{1,15}[ ][A-Z]{1}[a-z]{1,15}");
+        Matcher matcher = pattern.matcher(group.getFirstName());
+        if(matcher.matches()){
+            service.save(group);
+            model.addAttribute("organisers", service.getAll());
+            return "redirect:/web/organiser/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -98,8 +107,15 @@ public class OrganiserWEBController {
         group.setid(id);
         group.setFirstName(organiserForm.getFirstname());
         group.setDescription(organiserForm.getDescription());
-        service.edit(group);
-        model.addAttribute("organisers", service.getAll());
-        return "redirect:/web/organiser/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z]{1,15}[ ][A-Z]{1}[a-z]{1,15}");
+        Matcher matcher = pattern.matcher(group.getFirstName());
+        if(matcher.matches()){
+            service.edit(group);
+            model.addAttribute("organisers", service.getAll());
+            return "redirect:/web/organiser/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

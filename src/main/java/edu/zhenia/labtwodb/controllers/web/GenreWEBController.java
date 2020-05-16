@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/web/genre")
@@ -75,9 +77,16 @@ public class GenreWEBController {
         Genre group = new Genre();
         group.setGenre(genreForm.getName());
         group.setDescription(genreForm.getDescription());
-        service.save(group);
-        model.addAttribute("genres", service.getAll());
-        return "redirect:/web/genre/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getGenre());
+        if(matcher.matches()){
+            service.save(group);
+            model.addAttribute("genres", service.getAll());
+            return "redirect:/web/genre/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -98,8 +107,15 @@ public class GenreWEBController {
         group.setid(id);
         group.setGenre(genreForm.getName());
         group.setDescription(genreForm.getDescription());
-        service.edit(group);
-        model.addAttribute("genres", service.getAll());
-        return "redirect:/web/genre/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getGenre());
+        if(matcher.matches()){
+            service.edit(group);
+            model.addAttribute("genres", service.getAll());
+            return "redirect:/web/genre/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

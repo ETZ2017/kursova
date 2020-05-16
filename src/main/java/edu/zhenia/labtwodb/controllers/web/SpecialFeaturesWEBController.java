@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/web/specialfeatures")
@@ -76,9 +78,16 @@ public class SpecialFeaturesWEBController {
         group.setType(specialFeaturesForm.getType());
         //group.setValue(specialFeaturesForm.getValue());
         group.setDescription(specialFeaturesForm.getDescription());
-        service.save(group);
-        model.addAttribute("specialFeaturess", service.getAll());
-        return "redirect:/web/specialfeatures/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getType());
+        if(matcher.matches()){
+            service.save(group);
+            model.addAttribute("specialFeaturess", service.getAll());
+            return "redirect:/web/specialfeatures/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -101,8 +110,15 @@ public class SpecialFeaturesWEBController {
         //group.setValue(specialFeaturesForm.getValue());
         group.setType(specialFeaturesForm.getType());
         group.setDescription(specialFeaturesForm.getDescription());
-        service.edit(group);
-        model.addAttribute("specialfeaturess", service.getAll());
-        return "redirect:/web/specialfeatures/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getType());
+        if(matcher.matches()){
+            service.edit(group);
+            model.addAttribute("specialfeaturess", service.getAll());
+            return "redirect:/web/specialfeatures/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

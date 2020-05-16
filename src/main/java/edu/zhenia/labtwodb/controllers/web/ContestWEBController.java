@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/web/contest")
@@ -74,9 +76,15 @@ public class ContestWEBController {
         Contest group = new Contest();
         group.setName(contestForm.getcontest());
         group.setDescription(contestForm.getDescription());
-        service.save(group);
-        model.addAttribute("contests", service.getAll());
-        return "redirect:/web/contest/list";
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getName());
+        if(matcher.matches()){
+            service.save(group);
+            model.addAttribute("contests", service.getAll());
+            return "redirect:/web/contest/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -97,8 +105,15 @@ public class ContestWEBController {
         group.setid(id);
         group.setName(contestForm.getcontest());
         group.setDescription(contestForm.getDescription());
-        service.edit(group);
-        model.addAttribute("contests", service.getAll());
-        return "redirect:/web/contest/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z: ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getName());
+        if(matcher.matches()){
+            service.edit(group);
+            model.addAttribute("contests", service.getAll());
+            return "redirect:/web/contest/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

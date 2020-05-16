@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Controller
@@ -104,9 +106,18 @@ public class CulturalBuildingWEBController {
         group.setValue(culturalBuildingForm.getValue());
         group.setName(culturalBuildingForm.getName());
         group.setDescription(culturalBuildingForm.getDescription());
-        service.save(group);
-        model.addAttribute("culturalBuildings", service.getAll());
-        return "redirect:/web/building/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z. ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getName());
+        Pattern pattern2 = Pattern.compile("^[1-9][0-9]{1,5}");
+        Matcher matcher2 = pattern2.matcher(group.getValue());
+        if(matcher.matches() && matcher2.matches()){
+            service.save(group);
+            model.addAttribute("culturalBuildings", service.getAll());
+            return "redirect:/web/building/list";
+        } else {
+            return "validationFailed";
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -143,8 +154,17 @@ public class CulturalBuildingWEBController {
         group.setName(culturalBuildingForm.getName());
         group.setValue(culturalBuildingForm.getValue());
         group.setDescription(culturalBuildingForm.getDescription());
-        service.edit(group);
-        model.addAttribute("culturalBuildings", service.getAll());
-        return "redirect:/web/building/list";
+
+        Pattern pattern = Pattern.compile("^[A-Z][a-z. ]{1,30}");
+        Matcher matcher = pattern.matcher(group.getName());
+        Pattern pattern2 = Pattern.compile("^[1-9][0-9]{1,5}");
+        Matcher matcher2 = pattern2.matcher(group.getValue());
+        if(matcher.matches() && matcher2.matches()){
+            service.edit(group);
+            model.addAttribute("culturalBuildings", service.getAll());
+            return "redirect:/web/building/list";
+        } else {
+            return "validationFailed";
+        }
     }
 }

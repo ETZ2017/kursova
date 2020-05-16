@@ -1,5 +1,6 @@
 package edu.zhenia.labtwodb.forms;
 
+
 public class ArtistForm {
     private String id;
     private String firstname;
