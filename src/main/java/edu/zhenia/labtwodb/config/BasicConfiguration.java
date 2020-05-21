@@ -37,12 +37,12 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                     .and()
                     .httpBasic()
                     .and()
-                    .exceptionHandling().accessDeniedPage("/accessDenied.jsp");
+                    .exceptionHandling().accessDeniedPage("/403");
 
         }
 
-        @Bean
+       /* @Bean
         public AccessDeniedHandler accessDeniedHandler(){
             return new CustomAccessDeniedHandler();
-        }
+        }*/
 }

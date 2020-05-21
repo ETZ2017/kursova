@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-public class CustomAccessDeniedHandler implements AccessDeniedHandler {
+public class  CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private static final Logger LOG = Logger.getLogger(CustomAccessDeniedHandler.class);
 
