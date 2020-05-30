@@ -19,89 +19,83 @@
     }
 </script>
 
-<div>
-    <a href="/web" style="float: left; margin-top: 3px;">
-        <img src="https://img.icons8.com/ios-glyphs/24/000000/circled-left-2.png"/>
-    </a>
-    <h1 style="text-align: center; margin-bottom: 10px">Cultural Building List
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"
-             onclick="myFunction()">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </h1>
-</div>
+<div class="container-fluid">
+    <div>
+        <a href="/web" style="float: left; margin-top: 7px;">
+            <img src="https://img.icons8.com/ios-glyphs/24/000000/circled-left-2.png" style="width: 28px;"/>
+        </a>
+        <h1 style="text-align: center; margin-bottom: 10px;">Cultural Building List
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"
+                 onclick="myFunction()">
+                <circle cx="11" cy="11" r="8"/><line x1="23" y1="23" x2="18.65" y2="18.65"/></svg>
+        </h1>
+    </div>
 
 
-<div id="search" style="display:none;">
-    <fieldset>
-        <legend style="margin: 5px">Find by Name</legend>
+    <div id="search" style="display:none;">
         <form name="search" action="" method="POST" style="margin: 5px">
-            Name:<@spring.formInput "searchForm.searchFieldReserve3", "", "text"/>
+            <fieldset style="display: inline">
+                    <legend style="margin: 5px">Find by Name</legend>
+                    Name:<@spring.formInput "searchForm.searchFieldReserve3", "", "text"/>
+                    <br>
+            </fieldset>
+            <fieldset style="display: inline">
+                    <legend style="margin: 5px">Find by Type</legend>
+                    Type:<@spring.formInput "searchForm.searchField", "", "text"/>
+                    <br>
+            </fieldset>
+            <fieldset style="display: inline">
+                    <legend style="margin: 5px">Find by Special Features and their Values</legend>
+                    Special Feature:<@spring.formInput "searchForm.searchFieldReserve", "", "text"/>
+                    Value:<@spring.formInput "searchForm.searchFieldReserve2", "", "text"/>
+                    <br>
+            </fieldset>
             <br>
-            <input type="submit" value="Search" class="btn btn-info" style="margin-top: 5px"/>
+            <input type="submit" value="Search" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px"/>
         </form>
-    </fieldset>
-    <br>
-    <fieldset>
-        <legend style="margin: 5px">Find by Type</legend>
-        <form name="search" action="" method="POST" style="margin: 5px">
-            Type:<@spring.formInput "searchForm.searchField", "", "text"/>
-            <br>
-            <input type="submit" value="Search" class="btn btn-info" style="margin-top: 5px"/>
-        </form>
-    </fieldset>
-    <br>
-    <fieldset>
-        <legend style="margin: 5px">Find by Special Features and their Values</legend>
-        <form name="search" action="" method="POST" style="margin: 5px">
-            Special Feature:<@spring.formInput "searchForm.searchFieldReserve", "", "text"/>
-            Value:<@spring.formInput "searchForm.searchFieldReserve2", "", "text"/>
-            <br>
-            <input type="submit" value="Search" class="btn btn-info" style="margin-top: 5px"/>
-        </form>
-    </fieldset>
-    <br>
-</div>
+    </div>
 
-<div>
-    <table border="3"class="table table-sm table-dark">
-    <tr>
-        <th>id</th>
-        <th>Name
-            <a href="/web/building/sorted" type="button" class="btn btn-outline-light">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                     stroke-linejoin="round" class="feather feather-filter">
-                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></a>
-            <a href="/web/building/list" type="button" class="btn btn-outline-light">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="feather feather-rotate-ccw"><polyline points="1 4 1 10 7 10"/>
-                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                Undo sort</a></th>
-        <th>Type</th>
-        <th>Specials</th>
-        <th>Special Feature's value</th>
-        <th>Description</th>
-        <th>Delete</th>
-        <th>Edit</th>
-            <#--<th>Last Name</th>
-            <th>Patronymic</th>-->
-    </tr>
-    <#list culturalBuildings as culturalBuilding>
-        <tr class="bg-info">
-            <td>${culturalBuilding.id}</td>
-            <td>${culturalBuilding.name}</td>
-            <td>${culturalBuilding.type.type}</td>
-            <td>${culturalBuilding.specials.type}</td>
-            <td>${culturalBuilding.value}</td>
-            <td>${culturalBuilding.description}</td>
-            <td><a href="delete/${culturalBuilding.id}"><button>Delete</button></a></td>
-            <td><a href="edit/${culturalBuilding.id}"><button>Edit</button></a></td>
-        </tr>
-    </#list>
-    </table>
-    <a href="create"><button>Create</button></a>
+    <a href="create" style="float: right; margin: 5px"><button class="btn btn-outline-dark">Create</button></a>
+
+    <div class="table-responsive-md">
+        <table class="table table-sm table-striped table-bordered" style="vertical-align: center; border: 3px solid #31373e">
+            <tr class="bg-dark text-light">
+                <th class="align-middle">Id</th>
+                <th class="align-middle">Name
+                    <a style="margin-left: 3px" href="/web/artistatevent/sorted" type="button" class="btn btn-outline-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" class="feather feather-filter">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></a>
+                    <a href="/web/artistatevent/list" type="button" class="btn btn-outline-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-rotate-ccw"><polyline points="1 4 1 10 7 10"/>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                        Undo sort</a></th>
+                <th class="align-middle">Type</th>
+                <th class="align-middle">Specials</th>
+                <th class="align-middle">Special Feature's value</th>
+                <th class="align-middle">Description</th>
+                <th class="align-middle">Edit</th>
+                <th class="align-middle">Delete</th>
+            </tr>
+
+        <#list culturalBuildings as culturalBuilding>
+            <tr class="" style="font-size: larger">
+                <td class="align-middle">${culturalBuilding.id}</td>
+                <td class="align-middle">${culturalBuilding.name}</td>
+                <td class="align-middle">${culturalBuilding.type.type}</td>
+                <td class="align-middle">${culturalBuilding.specials.type}</td>
+                <td class="align-middle">${culturalBuilding.value}</td>
+                <td class="align-middle">${culturalBuilding.description}</td>
+                <td class="align-middle" style="width:1%; white-space:nowrap;"><a href="edit/${culturalBuilding.id}"><button class="btn btn-outline-dark">Edit</button></a></td>
+                <td class="align-middle" style="width:1%; white-space:nowrap;"><a href="delete/${culturalBuilding.id}"><button class="btn btn-outline-dark">Delete</button></a></td>
+            </tr>
+        </#list>
+        </table>
+    </div>
 </div>
 </body>
 </html>

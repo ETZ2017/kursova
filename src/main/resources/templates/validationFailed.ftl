@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color: rgba(151,178,219,0.5)">
+<html lang="en" style="background-color: #31373e">
 <head>
     <meta charset="UTF-8">
     <title>Validation failed</title>
 </head>
 <body>
 <ul style="font-size: large;
+               font-family: 'Source Code Pro';
                list-style-type: circle;
                padding: 25px;
-               background: #97b2db;
+               background: #f4f4f4;
+               border: 1px solid #31373e;
                border-radius: 3px;
                position: fixed; top: 50%; left: 50%;
                -webkit-transform: translate(-50%, -50%);
@@ -37,7 +39,7 @@
     </li>
     <br>
     <li style="margin: 10px; text-align: center; font-size: larger; list-style-type: none;">
-        <a href="/web">Go back to the tables' list</a>
+        <a href="/web" style="color: red;">Go back to the tables' list</a>
     </li>
 </ul>
 </body>

@@ -19,73 +19,71 @@
     }
 </script>
 
-<div>
-    <a href="/web" style="float: left; margin-top: 3px;">
-        <img src="https://img.icons8.com/ios-glyphs/24/000000/circled-left-2.png"/>
-    </a>
-    <h1 style="text-align: center; margin-bottom: 10px">Artist-Impressario List
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"
-             onclick="myFunction()">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </h1>
-</div>
+<div class="container-fluid">
+    <div>
+        <a href="/web" style="float: left; margin-top: 7px;">
+            <img src="https://img.icons8.com/ios-glyphs/24/000000/circled-left-2.png" style="width: 28px;"/>
+        </a>
+        <h1 style="text-align: center; margin-bottom: 10px;">Artist-Impressario List
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"
+                 onclick="myFunction()">
+                <circle cx="11" cy="11" r="8"/><line x1="23" y1="23" x2="18.65" y2="18.65"/></svg>
+        </h1>
+    </div>
 
 
-<div id="search" style="display:none;">
-    <fieldset>
-        <legend style="margin: 5px">Find by Artist</legend>
-        <form name="search" action="" method="POST" style="margin: 5px">
-            Artist's name:<@spring.formInput "searchForm.searchField", "", "text"/>
+    <div id="search" style="display:none;">
+                    <form name="search" action="" method="POST" style="margin: 5px">
+                        <fieldset style="display: inline">
+                <legend style="margin: 5px">Find by Artist</legend>
+                Artist's name:<@spring.formInput "searchForm.searchField", "", "text"/>
+                <br>
+            </fieldset>
+            <fieldset style="display: inline">
+                <legend style="margin: 5px">Find by Impressario</legend>
+                Genre:<@spring.formInput "searchForm.searchFieldReserve", "", "text"/>
+                <br>
+            </fieldset>
             <br>
-            <input type="submit" value="Search" class="btn btn-info" style="margin-top: 5px"/>
+            <input type="submit" value="Search" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px"/>
         </form>
-    </fieldset>
-    <br>
-    <fieldset>
-        <legend style="margin: 5px">Find by Impressario</legend>
-        <form name="search" action="" method="POST" style="margin: 5px">
-            Genre:<@spring.formInput "searchForm.searchFieldReserve", "", "text"/>
-            <br>
-            <input type="submit" value="Search" class="btn btn-info" style="margin-top: 5px"/>
-        </form>
-    </fieldset>
-    <br>
-</div>
+    </div>
 
-<div>
-    <table border="3"class="table table-sm table-dark">
-        <tr>
-            <th>id</th>
-            <th>Artist
-                <a href="/web/artistimpressario/sorted" type="button" class="btn btn-outline-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                         stroke-linejoin="round" class="feather feather-filter">
-                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></a>
-                <a href="/web/artistimpressario/list" type="button" class="btn btn-outline-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-rotate-ccw"><polyline points="1 4 1 10 7 10"/>
-                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                    Undo sort</a></th>
-            <th>Impressario</th>
-            <th>Delete</th>
-            <th>Edit</th>
-            <#--<th>Last Name</th>
-            <th>Patronymic</th>-->
-        </tr>
-        <#list artistImpressarios as artistImpressario>
-            <tr class="bg-info">
-                <td>${artistImpressario.id}</td>
-                <td>${artistImpressario.artist.firstName}</td>
-                <td>${artistImpressario.impressario.firstName}</td>
-                <td><a href="delete/${artistImpressario.id}"><button>Delete</button></a></td>
-                <td><a href="edit/${artistImpressario.id}"><button>Edit</button></a></td>
+    <a href="create" style="float: right; margin: 5px"><button class="btn btn-outline-dark">Create</button></a>
+
+    <div class="table-responsive-md">
+        <table class="table table-sm table-striped table-bordered" style="vertical-align: center; border: 3px solid #31373e">
+            <tr class="bg-dark text-light">
+                <th class="align-middle">Id</th>
+                <th class="align-middle">Artist
+                    <a style="margin-left: 3px" href="/web/artistatevent/sorted" type="button" class="btn btn-outline-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" class="feather feather-filter">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></a>
+                    <a href="/web/artistatevent/list" type="button" class="btn btn-outline-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-rotate-ccw"><polyline points="1 4 1 10 7 10"/>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                        Undo sort</a></th>
+                <th class="align-middle">Impressario</th>
+                <th class="align-middle">Edit</th>
+                <th class="align-middle">Delete</th>
+            </tr>
+
+            <#list artistImpressarios as artistImpressario>
+            <tr class="" style="font-size: larger">
+                <td class="align-middle">${artistImpressario.id}</td>
+                <td class="align-middle">${artistImpressario.artist.firstName}</td>
+                <td class="align-middle">${artistImpressario.impressario.firstName}</td>
+                <td class="align-middle" style="width:1%; white-space:nowrap;"><a href="edit/${artistImpressario.id}"><button class="btn btn-outline-dark">Edit</button></a></td>
+                <td class="align-middle" style="width:1%; white-space:nowrap;"><a href="delete/${artistImpressario.id}"><button class="btn btn-outline-dark">Delete</button></a></td>
             </tr>
         </#list>
-    </table>
-    <a href="create"><button>Create</button></a>
+        </table>
+    </div>
 </div>
 </body>
 </html>

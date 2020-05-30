@@ -1,42 +1,61 @@
 <#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
-<html lang="en" style="background-color: rgba(151,178,219,0.5)">
+<html lang="en" style="background-color: #31373e">
 <head>
     <meta charset="UTF-8">
     <title>Add Building</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 <form name="building" action="" method="POST">
-    <ul style="font-size: large;
+    <ul class="list-group" style="font-size: large;
+               font-family: 'Source Code Pro';
                list-style-type: none;
-               padding: 25px;
-               background: #97b2db;
+               text-decoration: none;
+               padding: 18px;
+               background: #f4f4f4;
+               border: 1px solid #31373e;
                border-radius: 3px;
                position: fixed; top: 50%; left: 50%;
                -webkit-transform: translate(-50%, -50%);
                -ms-transform: translate(-50%, -50%);
                transform: translate(-50%, -50%);">
-        <li style="font-size: x-large; text-align: center">
+        <li style="font-size: 2.5em; text-align: center; background-color: transparent;">
             Add building
         </li>
-        <li style="margin: 10px">
-            Building name:<@spring.formInput "culturalBuildingForm.name", "", "text"/>
+        <li style="font-size: 1.25em; margin: 8px; background-color: transparent; border-radius: 60px">
+            Building name:
+            <br>
+            <@spring.formInput "culturalBuildingForm.name", "", "text"/>
         </li>
-        <li style="margin: 10px">
-            Building type:<@spring.formSingleSelect "culturalBuildingForm.type", type, ""/>
+        <li style="font-size: 1.25em; margin: 8px; background-color: transparent; border-radius: 60px">
+            Building type:
+            <br>
+            <@spring.formSingleSelect "culturalBuildingForm.type", type, ""/>
         </li>
-        <li style="margin: 10px">
-            Building special features:<@spring.formSingleSelect "culturalBuildingForm.specials", specials, ""/>
+        <li style="font-size: 1.25em; margin: 8px; background-color: transparent; border-radius: 60px">
+            Building special features:
+            <br>
+            <@spring.formSingleSelect "culturalBuildingForm.specials", specials, ""/>
         </li>
-        <li style="margin: 10px">
-            Building special feature's value:<@spring.formInput "culturalBuildingForm.value", "", "text"/>
+        <li style="font-size: 1.25em; margin: 8px; background-color: transparent; border-radius: 60px">
+            Building special feature's value:
+            <br>
+            <@spring.formInput "culturalBuildingForm.value", "", "text"/>
         </li>
-        <li style="margin: 10px">
-            Building description:<@spring.formInput "culturalBuildingForm.description", "", "text"/>
+        <li style="font-size: 1.25em; margin: 8px; background-color: transparent; border-radius: 60px">
+            Building description:
+            <br>
+            <@spring.formInput "culturalBuildingForm.description", "", "text"/>
         </li>
-        <li style="margin: 10px; text-align: center">
-            <input type="submit" value="Create" style="width: 100px; height: 30px; margin-top: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.29)"/>
+        <li style="font-size: 1em; margin: 8px; text-align: center; background-color: transparent;">
+            <#--            <button class="btn btn-outline-dark" type="submit" style="width: 100px; height: 30px; margin-top: 5px;">-->
+            <#--                Create</button>-->
+            <button class="btn btn-dark" type="submit" style="margin-top: 5px;
+                                                              width: 86px;
+                                                              font-size: larger;
+                                                              font-family: 'Source Code Pro';">
+                Create</button>
         </li>
     </ul>
 
