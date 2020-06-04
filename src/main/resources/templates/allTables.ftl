@@ -1,6 +1,6 @@
 <#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
-<html lang="en" style="background-image:url(104389_626-min.jpg);
+<html lang="en" style="background-image:url(1.jpg);
                 background-repeat: no-repeat;
                 background-attachment: fixed;
                 background-size: cover;
