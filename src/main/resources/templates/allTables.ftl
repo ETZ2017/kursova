@@ -1,6 +1,6 @@
 <#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
-<html lang="en" style="background-image:url(https://shahraranews.ir/files/fa/news/1399/1/28/104389_626.jpg);
+<html lang="en" style="background-image:url(104389_626-min.jpg);
                 background-repeat: no-repeat;
                 background-attachment: fixed;
                 background-size: cover;
